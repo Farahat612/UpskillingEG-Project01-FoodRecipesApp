@@ -1,10 +1,11 @@
+import { useLogin } from '../../hooks/Auth'
+import { useNavigate } from 'react-router-dom'
+
 import { AuthLayout } from '../../layouts'
 import { AuthForm } from '../../components/auth'
-import { useNavigate } from 'react-router-dom'
 import { LoadingSpinner } from '../../components/shared'
 import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from 'react-icons/fa'
 import { Form, InputGroup } from 'react-bootstrap'
-import { useLogin } from '../../hooks/Auth'
 
 const Login = () => {
   const navigate = useNavigate()
