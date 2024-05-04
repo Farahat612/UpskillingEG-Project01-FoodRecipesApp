@@ -1,0 +1,66 @@
+{
+  "id": 345,
+  "userName": "farahat6",
+  "email": "farahat061297@gmail.com",
+  "country": "egypt",
+  "phoneNumber": "01015788869",
+  "imagePath": null,
+  "group": {
+    "id": 1,
+    "name": "SuperAdmin",
+    "creationDate": "2024-02-10T11:15:00.197Z",
+    "modificationDate": "2024-02-10T11:15:00.197Z",
+    "roles": [
+      {
+        "id": 1,
+        "name": "Admin",
+        "creationDate": "2024-02-10T11:14:59.191Z",
+        "modificationDate": "2024-02-10T11:14:59.191Z"
+      },
+      {
+        "id": 17,
+        "name": "canAddUser",
+        "creationDate": "2024-02-10T11:15:00.089Z",
+        "modificationDate": "2024-02-10T11:15:00.089Z"
+      },
+      {
+        "id": 15,
+        "name": "canUpdateUser",
+        "creationDate": "2024-02-10T11:14:59.994Z",
+        "modificationDate": "2024-02-10T11:14:59.994Z"
+      },
+      {
+        "id": 16,
+        "name": "canDeleteUser",
+        "creationDate": "2024-02-10T11:14:59.997Z",
+        "modificationDate": "2024-02-10T11:14:59.997Z"
+      },
+      {
+        "id": 19,
+        "name": "canGetUserById",
+        "creationDate": "2024-02-10T11:15:00.094Z",
+        "modificationDate": "2024-02-10T11:15:00.094Z"
+      },
+      {
+        "id": 14,
+        "name": "canGetCurrentUser",
+        "creationDate": "2024-02-10T11:14:59.992Z",
+        "modificationDate": "2024-02-10T11:14:59.992Z"
+      },
+      {
+        "id": 18,
+        "name": "canGetAllUsers",
+        "creationDate": "2024-02-10T11:15:00.092Z",
+        "modificationDate": "2024-02-10T11:15:00.092Z"
+      },
+      {
+        "id": 13,
+        "name": "canChangePassword",
+        "creationDate": "2024-02-10T11:14:59.897Z",
+        "modificationDate": "2024-02-10T11:14:59.897Z"
+      }
+    ]
+  },
+  "creationDate": "2024-04-23T16:07:00.490Z",
+  "modificationDate": "2024-04-23T16:07:00.490Z"
+}
