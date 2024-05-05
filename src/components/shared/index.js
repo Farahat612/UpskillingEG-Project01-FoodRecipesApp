@@ -6,6 +6,8 @@ import LoadingSpinner from './LoadingSpinner'
 import SideBar from './Sidebar'
 import Navbar from './NAvbar'
 import GlobalModal from './GlobalModal'
+import Header from './Header'
+import Banner from './Banner'
 
 export {
   RouteGuard,
@@ -16,4 +18,6 @@ export {
   SideBar,
   Navbar,
   GlobalModal,
+  Header,
+  Banner,
 }
