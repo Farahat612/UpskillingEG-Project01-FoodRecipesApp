@@ -10,15 +10,19 @@ const Banner = ({ buttonTitle, buttonDestination, children, btnId }) => {
       <div className='content w-75'>{children}</div>
 
       <div className='button'>
-        <Button
-          variant='success'
-          className='btn btn-success px-4 d-flex align-items-center gap-3'
-          id={btnId}
-          onClick={() => navigate(`${buttonDestination}`)}
-        >
-          {buttonTitle}
-          <FaArrowRight />
-        </Button>
+        {buttonTitle && (
+          <Button
+            variant='success'
+            className='btn btn-success px-4 d-flex align-items-center gap-3'
+            id={btnId}
+            onClick={
+              buttonDestination ? () => navigate(buttonDestination) : null
+            }
+          >
+            {buttonTitle}
+            <FaArrowRight />
+          </Button>
+        )}
       </div>
     </div>
   )
@@ -28,7 +32,7 @@ export default Banner
 
 Banner.propTypes = {
   children: PropTypes.node,
-  buttonTitle: PropTypes.string.isRequired,
-  buttonDestination: PropTypes.string.isRequired,
+  buttonTitle: PropTypes.string,
+  buttonDestination: PropTypes.string,
   btnId: PropTypes.string,
 }

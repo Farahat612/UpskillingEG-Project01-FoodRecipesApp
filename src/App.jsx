@@ -1,3 +1,5 @@
+// react hooks
+import { useEffect } from 'react'
 // react-router-dom
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // contexts
@@ -7,8 +9,6 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // components
 import { NotFound } from './components/shared'
-// Layouts
-
 // Auth
 import {
   Login,
@@ -30,7 +30,6 @@ import { Dashboard } from './modules/5.Dashboard'
 
 // styles
 import './App.css'
-import { useEffect } from 'react'
 
 function App() {
   const { saveUser } = useAuth()
