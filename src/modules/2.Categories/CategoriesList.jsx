@@ -45,7 +45,7 @@ const CategoriesList = () => {
           className='rounded rounded-5'
         >
           {state.loading ? (
-            <div className='w-100 h-100 d-flex flex-column justify-content-center align-items-center gap-5'>
+            <div className='w-100 h-100 my-5 py-5 d-flex flex-column justify-content-center align-items-center gap-3'>
               <LoadingScreen />
             </div>
           ) : (
