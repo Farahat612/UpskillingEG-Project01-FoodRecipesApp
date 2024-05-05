@@ -9,7 +9,7 @@ import { useAuth } from '../../contexts/authContext'
 // axios
 import axios from 'axios'
 // toast
-import { toast } from 'react-toastify'
+import { notify } from '../../utils/notify'
 
 const useLogin = () => {
   // LoadingState
@@ -47,17 +47,13 @@ const useLogin = () => {
       // save login Data
       saveUser()
       // Show success message
-      toast.success('Logged in successfully', {
-        autoClose: 2000,
-      })
+      notify('success', 'Logged in successfully')
       //Redirect to dashboard
       navigate('/')
     } catch (error) {
       // console.log(error.message)
       // Show error message
-      toast.error(error.response.data.message, {
-        autoClose: 2000,
-      })
+      notify('error', error.response.data.message)
     } finally {
       // * End Loading
       setBtnLoading(false)

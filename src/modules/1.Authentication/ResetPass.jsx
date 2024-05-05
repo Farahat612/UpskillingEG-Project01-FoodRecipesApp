@@ -1,7 +1,7 @@
 import { useReset } from '../../hooks/Auth'
 
 import { AuthLayout } from '../../layouts'
-import { AuthForm } from '../../components/auth'
+import AuthForm from './components/AuthForm'
 import { LoadingSpinner } from '../../components/shared'
 import { Form, InputGroup } from 'react-bootstrap'
 import { FaEnvelope, FaEye, FaEyeSlash, FaKey, FaLock } from 'react-icons/fa'

@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 // axios
 import axios from 'axios'
 // toast
-import { toast } from 'react-toastify'
+import { notify } from '../../utils/notify'
 
 const useVerify = () => {
   // initialize navigate to redirect to another page
@@ -34,16 +34,12 @@ const useVerify = () => {
 
       // * Success:
       // Show success message
-      toast.success(response.data.message, {
-        autoClose: 2000,
-      })
+      notify('success', response.data.message)
       // Redirect to reset password page
       navigate('/login')
     } catch (error) {
       // Show error message
-      toast.error(error.response.data.message, {
-        autoClose: 2000,
-      })
+      notify('error', error.response.data.message)
     } finally {
       setBtnLoading(false)
     }

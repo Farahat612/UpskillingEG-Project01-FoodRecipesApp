@@ -6,7 +6,7 @@ import { useCategories } from '../../hooks/categories'
 
 import { MasterLayout } from '../../layouts'
 import { Header, Banner, LoadingScreen, NoData } from '../../components/shared'
-import { CategoryFormModal } from '../../components/categories'
+import { CategoryFormModal } from './'
 import Svg from '../../assets/header/others.svg'
 import { Table, Pagination } from 'react-bootstrap'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
@@ -171,34 +171,36 @@ const CategoriesList = () => {
       </div>
 
       {/* Pagination */}
-      <Pagination className='d-flex justify-content-start '>
-        <Pagination.First
-          onClick={() => setPagination(1, state.pageSize)}
-          disabled={currentPage === 1}
-        />
-        <Pagination.Prev
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-        />
-        {totalPages > 0 &&
-          Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <Pagination.Item
-              key={page}
-              active={page === currentPage}
-              onClick={() => setPagination(page, state.pageSize)}
-            >
-              {page}
-            </Pagination.Item>
-          ))}
-        <Pagination.Next
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        />
-        <Pagination.Last
-          onClick={() => setPagination(totalPages, state.pageSize)}
-          disabled={currentPage === totalPages}
-        />
-      </Pagination>
+      {!state.loading && (
+        <Pagination className='d-flex justify-content-start '>
+          <Pagination.First
+            onClick={() => setPagination(1, state.pageSize)}
+            disabled={currentPage === 1}
+          />
+          <Pagination.Prev
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          />
+          {totalPages > 0 &&
+            Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Pagination.Item
+                key={page}
+                active={page === currentPage}
+                onClick={() => setPagination(page, state.pageSize)}
+              >
+                {page}
+              </Pagination.Item>
+            ))}
+          <Pagination.Next
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          />
+          <Pagination.Last
+            onClick={() => setPagination(totalPages, state.pageSize)}
+            disabled={currentPage === totalPages}
+          />
+        </Pagination>
+      )}
 
       {/* Actions Modal */}
       <CategoryFormModal type={type} actionCategory={actionCategory} />

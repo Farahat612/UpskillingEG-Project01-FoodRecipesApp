@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 // axios
 import axios from 'axios'
 // toast
-import { toast } from 'react-toastify'
+import { notify } from '../../utils/notify'
 
 const useReset = () => {
   // initialize navigate to redirect to another page
@@ -40,15 +40,13 @@ const useReset = () => {
       console.log(response.data)
       // * Success:
       // Show success message
-      toast.success('Password has been updated successfully, please login.', {
-        autoClose: 2000,
-      })
+      notify('success', 'Password has been updated successfully, please login.')
       //Redirect to login page
       navigate('/login')
     } catch (error) {
       // console.log(error.message)
       // Show error message
-      toast.error(error.response.data.message, { autoClose: 2000 })
+     notify('error', error.response.data.message)
     } finally {
       // * End Loading
       setBtnLoading(false)

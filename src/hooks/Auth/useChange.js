@@ -9,7 +9,7 @@ import { useAuth } from '../../contexts/authContext'
 // axios
 import axios from 'axios'
 // toast
-import { toast } from 'react-toastify'
+import { notify } from '../../utils/notify'
 
 const useChange = () => {
   // context
@@ -47,9 +47,7 @@ const useChange = () => {
       console.log(response.data)
       // * Success:
       // Show success message
-      toast.success('Password has been changed successfully, please login.', {
-        autoClose: 2000,
-      })
+      notify('success', 'Password has been changed successfully, please login.')
       // Close Modal
       // closeModal()
       // logout
@@ -59,7 +57,7 @@ const useChange = () => {
     } catch (error) {
       console.log(error.response)
       // Show error message
-      toast.error(error.response.data.message, { autoClose: 2000 })
+      notify('error', error.response.data.message)
     } finally {
       // * End Loading
       setBtnLoading(false)

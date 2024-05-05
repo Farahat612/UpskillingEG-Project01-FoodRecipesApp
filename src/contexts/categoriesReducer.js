@@ -13,7 +13,7 @@ const initialState = {
 function categoriesReducer(state = initialState, action) {
   switch (action.type) {
     case 'GET_CATEGORIES':
-      return { ...state, loading: true } // Set loading to true before fetching categories
+      return { ...state, loading: true }
     case 'GET_CATEGORIES_SUCCESS':
       return {
         ...state,
@@ -21,9 +21,9 @@ function categoriesReducer(state = initialState, action) {
         totalNumberOfRecords: action.payload.totalNumberOfRecords,
         totalNumberOfPages: action.payload.totalNumberOfPages,
         loading: false,
-      } // Set loading to false after successful fetch
+      }
     case 'GET_CATEGORIES_FAILURE':
-      return { ...state, loading: false } // Set loading to false if fetching fails
+      return { ...state, loading: false }
     case 'SET_FILTER':
       return { ...state, filter: action.payload }
     case 'SET_PAGINATION':
@@ -33,17 +33,17 @@ function categoriesReducer(state = initialState, action) {
         pageSize: action.payload.pageSize,
       }
     case 'ADD_CATEGORY':
-      return { ...state, loading: true } // Set loading to true before adding a category
+      return { ...state, loading: true }
     case 'ADD_CATEGORY_SUCCESS':
       return {
         ...state,
-        categories: [...state.categories, action.payload],
+        categories: [action.payload, ...state.categories],
         loading: false, // Set loading to false after successful addition
       }
     case 'ADD_CATEGORY_FAILURE':
-      return { ...state, loading: false } // Set loading to false if adding category fails
+      return { ...state, loading: false }
     case 'UPDATE_CATEGORY':
-      return { ...state, loading: true } // Set loading to true before updating a category
+      return { ...state, loading: true }
     case 'UPDATE_CATEGORY_SUCCESS':
       return {
         ...state,
@@ -53,9 +53,9 @@ function categoriesReducer(state = initialState, action) {
         loading: false, // Set loading to false after successful update
       }
     case 'UPDATE_CATEGORY_FAILURE':
-      return { ...state, loading: false } // Set loading to false if updating category fails
+      return { ...state, loading: false }
     case 'DELETE_CATEGORY':
-      return { ...state, loading: true } // Set loading to true before deleting a category
+      return { ...state, loading: true }
     case 'DELETE_CATEGORY_SUCCESS':
       return {
         ...state,
@@ -65,7 +65,7 @@ function categoriesReducer(state = initialState, action) {
         loading: false, // Set loading to false after successful deletion
       }
     case 'DELETE_CATEGORY_FAILURE':
-      return { ...state, loading: false } // Set loading to false if deleting category fails
+      return { ...state, loading: false }
     default:
       return state
   }

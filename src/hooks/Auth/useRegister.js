@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 // axios
 import axios from 'axios'
 // toast
-import { toast } from 'react-toastify'
+import { notify } from '../../utils/notify'
 
 const useRegister = () => {
   // LoadingState
@@ -47,13 +47,11 @@ const useRegister = () => {
         'https://upskilling-egypt.com:3006/api/v1/Users/Register',
         formData
       )
-      toast.success(response.data.message)
+      notify('success', response.data.message)
       navigate('/verifyPass')
     } catch (error) {
       console.log(error)
-      toast.error(error.response.data.message, {
-        autoClose: 2000,
-      })
+      notify('error', error.response.data.message)
     } finally {
       setBtnLoading(false)
     }
