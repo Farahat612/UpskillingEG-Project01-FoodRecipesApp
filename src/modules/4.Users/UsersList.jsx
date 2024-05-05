@@ -1,8 +1,10 @@
+import { MasterLayout } from '../../layouts'
+
 const UsersList = () => {
   return (
-    <div>
+    <MasterLayout>
       <h1>Users List</h1>
-    </div>
+    </MasterLayout>
   )
 }
 

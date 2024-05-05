@@ -1,12 +1,10 @@
-
+import { MasterLayout } from '../../layouts'
 
 const RecipesList = () => {
   return (
-    <div>
-      <h1>
-        Recipes List
-      </h1>
-    </div>
+    <MasterLayout>
+      <h1>Recipes List</h1>
+    </MasterLayout>
   )
 }
 
