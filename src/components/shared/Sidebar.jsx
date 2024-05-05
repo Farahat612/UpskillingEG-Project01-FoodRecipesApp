@@ -2,11 +2,11 @@
 import { useState } from 'react'
 // react-router-dom
 import { NavLink } from 'react-router-dom'
-// context
+// contexts
 import { useAuth } from '../../contexts/authContext'
+import { useModal } from '../../contexts/modalContext'
 // toast
 import { toast } from 'react-toastify'
-
 // react-pro-sidebar
 import { Sidebar, Menu, MenuItem, sidebarClasses } from 'react-pro-sidebar'
 // icons
@@ -18,6 +18,9 @@ import {
   FaLock,
   FaSignOutAlt,
 } from 'react-icons/fa'
+// components
+import { GlobalModal } from './'
+import { ChangePass } from '../../modules/1.Authentication'
 
 // assets
 import Togller from '../../assets/toggler.png'
@@ -35,6 +38,9 @@ const SideBar = () => {
     logout()
     toast.warn('Logged out successfully', { autoClose: 1500 })
   }
+
+  // modal context
+  const { openModal } = useModal()
   return (
     <div className='sidebar-container'>
       <Sidebar
@@ -104,7 +110,10 @@ const SideBar = () => {
           </MenuItem>
 
           {/* Change Password */}
-          <MenuItem icon={<FaLock />}> Change Password</MenuItem>
+          <MenuItem icon={<FaLock />} onClick={openModal}>
+            {' '}
+            Change Password
+          </MenuItem>
 
           {/* Logout */}
           <MenuItem icon={<FaSignOutAlt />} onClick={handleLogoutClick}>
@@ -112,6 +121,11 @@ const SideBar = () => {
             Logout
           </MenuItem>
         </Menu>
+
+        {/* Change Password Modal */}
+        <GlobalModal>
+          <ChangePass />
+        </GlobalModal>
       </Sidebar>
     </div>
   )

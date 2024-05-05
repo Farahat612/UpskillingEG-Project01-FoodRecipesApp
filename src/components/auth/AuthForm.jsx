@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const AuthForm = ({ children }) => {
   return (
-    <div className='col-md-6 bg-white p-4 rounded rounded-3'>
+    <div className=' bg-white p-4 rounded rounded-3'>
       {/* Logo */}
       <div className='text-center mb-4'>
         <img src={Logo} alt='logo' className='img-fluid logo w-50' />
