@@ -4,6 +4,7 @@ import NotFound from './NotFound'
 import LoadingScreen from './LoadingScreen'
 import LoadingSpinner from './LoadingSpinner'
 import SideBar from './Sidebar'
+import Navbar from './NAvbar'
 
 export {
   RouteGuard,
@@ -12,4 +13,5 @@ export {
   LoadingScreen,
   LoadingSpinner,
   SideBar,
+  Navbar,
 }
