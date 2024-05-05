@@ -7,21 +7,40 @@ export const ModalContext = createContext()
 
 // Create the modal provider component
 const ModalProvider = ({ children }) => {
+  // Change Password Modal
   const [isModalOpen, setIsModalOpen] = useState(false)
-
   // Function to open the modal
   const openModal = () => {
     setIsModalOpen(true)
   }
-
   // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false)
   }
 
+  // Category Actions Modal
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
+  // Function to open the modal
+  const openCategoryModal = () => {
+    setIsCategoryModalOpen(true)
+  }
+  // Function to close the modal
+  const closeCategoryModal = () => {
+    setIsCategoryModalOpen(false)
+  }
+
   // Provide the modal state and functions to the children components
   return (
-    <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
+    <ModalContext.Provider
+      value={{
+        isModalOpen,
+        openModal,
+        closeModal,
+        isCategoryModalOpen,
+        openCategoryModal,
+        closeCategoryModal,
+      }}
+    >
       {children}
     </ModalContext.Provider>
   )

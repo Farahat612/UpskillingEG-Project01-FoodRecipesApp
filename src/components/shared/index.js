@@ -9,6 +9,7 @@ import GlobalModal from './GlobalModal'
 import Header from './Header'
 import Banner from './Banner'
 import NoData from './NoData'
+import DeleteData from './DeleteData'
 
 export {
   RouteGuard,
@@ -22,4 +23,5 @@ export {
   Header,
   Banner,
   NoData,
+  DeleteData,
 }
