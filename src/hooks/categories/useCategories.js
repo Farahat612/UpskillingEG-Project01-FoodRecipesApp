@@ -14,7 +14,7 @@ const useCategories = () => {
       dispatch({ type: 'GET_CATEGORIES_SUCCESS', payload: response.data.data }) // Dispatch action on successful fetch
     } catch (error) {
       dispatch({ type: 'GET_CATEGORIES_FAILURE' }) // Dispatch action if fetch fails
-      console.error('Error fetching categories:', error)
+      console.error('Error fetching categories:', error.response.data.message)
     }
   }
 

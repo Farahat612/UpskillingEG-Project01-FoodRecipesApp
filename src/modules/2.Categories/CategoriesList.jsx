@@ -4,7 +4,7 @@ import { CategoriesContext } from '../../contexts/categoriesContext'
 import { useCategories } from '../../hooks/categories'
 
 import { MasterLayout } from '../../layouts'
-import { Header, Banner, LoadingScreen } from '../../components/shared'
+import { Header, Banner, LoadingScreen, NoData } from '../../components/shared'
 import Svg from '../../assets/header/others.svg'
 import { Table } from 'react-bootstrap'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
@@ -59,56 +59,66 @@ const CategoriesList = () => {
                 </tr>
               </thead>
               <tbody>
-                {state.categories && Array.isArray(state.categories)
-                  ? state.categories.map((category, index) => (
-                      <tr key={category.id}>
-                        <th scope='row'>{index + 1}</th>
-                        <td>{category.name}</td>
-                        <td>
-                          {new Date(category.creationDate).toLocaleDateString(
-                            'en-US'
-                          )}
-                        </td>
-                        <td>
-                          <div className='dropdown d-flex justify-content-center'>
-                            <span
-                              className='cursor-pointer'
-                              id='dropdownMenuButton'
-                              data-bs-toggle='dropdown'
-                              aria-expanded='false'
-                            >
-                              <IoEllipsisHorizontal />
-                            </span>
+                {state.categories &&
+                Array.isArray(state.categories) &&
+                state.categories.length > 0 ? (
+                  state.categories.map((category, index) => (
+                    <tr key={category.id}>
+                      <th scope='row'>{index + 1}</th>
+                      <td>{category.name}</td>
+                      <td>
+                        {new Date(category.creationDate).toLocaleDateString(
+                          'en-US'
+                        )}
+                      </td>
+                      <td>
+                        <div className='dropdown d-flex justify-content-center'>
+                          <span
+                            className='cursor-pointer'
+                            id='dropdownMenuButton'
+                            data-bs-toggle='dropdown'
+                            aria-expanded='false'
+                          >
+                            <IoEllipsisHorizontal />
+                          </span>
 
-                            <ul
-                              className='dropdown-menu p-2'
-                              aria-labelledby='dropdownMenuButton'
-                            >
-                              <li>
-                                {/* // ! Here */}
-                                <p
-                                  className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center'
-                                  id='edit-category'
-                                >
-                                  <FaEdit />
-                                  <span className='text-dark'>Edit</span>
-                                </p>
-                              </li>
-                              <li>
-                                <p
-                                  className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center m-0'
-                                  id='delete-category'
-                                >
-                                  <FaTrashAlt />
-                                  <span className='text-dark'>Delete</span>
-                                </p>
-                              </li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  : null}
+                          <ul
+                            className='dropdown-menu p-2'
+                            aria-labelledby='dropdownMenuButton'
+                          >
+                            <li>
+                              {/* // ! Here */}
+                              <p
+                                className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center'
+                                id='edit-category'
+                              >
+                                <FaEdit />
+                                <span className='text-dark'>Edit</span>
+                              </p>
+                            </li>
+                            <li>
+                              <p
+                                className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center m-0'
+                                id='delete-category'
+                              >
+                                <FaTrashAlt />
+                                <span className='text-dark'>Delete</span>
+                              </p>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <>
+                    <tr>
+                      <td colSpan='8'>
+                        <NoData />
+                      </td>
+                    </tr>
+                  </>
+                )}
               </tbody>
             </>
           )}

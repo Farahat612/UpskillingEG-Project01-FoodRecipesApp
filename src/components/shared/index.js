@@ -8,6 +8,7 @@ import Navbar from './NAvbar'
 import GlobalModal from './GlobalModal'
 import Header from './Header'
 import Banner from './Banner'
+import NoData from './NoData'
 
 export {
   RouteGuard,
@@ -20,4 +21,5 @@ export {
   GlobalModal,
   Header,
   Banner,
+  NoData,
 }
