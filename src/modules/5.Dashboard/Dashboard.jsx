@@ -1,8 +1,10 @@
+import { MasterLayout } from '../../layouts'
+
 const Dashboard = () => {
   return (
-    <div>
+    <MasterLayout>
       <h1>Welcome to Dashboard</h1>
-    </div>
+    </MasterLayout>
   )
 }
 
