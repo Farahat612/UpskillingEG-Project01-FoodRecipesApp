@@ -8,18 +8,17 @@ import { MasterLayout } from '../../layouts'
 import { Header, Banner, LoadingScreen, NoData } from '../../components/shared'
 import { CategoryFormModal } from '../../components/categories'
 import Svg from '../../assets/header/others.svg'
-import { Table } from 'react-bootstrap'
+import { Table, Pagination } from 'react-bootstrap'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import { IoEllipsisHorizontal } from 'react-icons/io5'
 
 const CategoriesList = () => {
   const { state } = useContext(CategoriesContext)
-  const { getCategories } = useCategories()
+  const { getCategories, setFilter, setPagination } = useCategories()
 
-  // getCategories when the component mounts
   useEffect(() => {
-    getCategories()
-  }, [])
+    getCategories(state.pageNumber, state.pageSize, state.filter)
+  }, [state.pageNumber, state.pageSize, state.filter])
 
   // Actions Modal
   const { openCategoryModal } = useModal()
@@ -41,6 +40,16 @@ const CategoriesList = () => {
     openCategoryModal()
   }
 
+  // pagination
+  const handleNextPage = () => {
+    setPagination(state.pageNumber + 1, state.pageSize)
+  }
+  const handlePreviousPage = () => {
+    setPagination(state.pageNumber - 1, state.pageSize)
+  }
+  let totalPages = Math.ceil(state.totalNumberOfRecords / state.pageSize)
+  let currentPage = state.pageNumber
+
   return (
     <MasterLayout>
       {/* Header and Banner */}
@@ -61,6 +70,17 @@ const CategoriesList = () => {
         </Banner>
       </div>
 
+      {/* Filteration By name */}
+      <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Search by name'
+          value={state.filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
+      </div>
+
       {/* Categories Table */}
       <div className='categories-table'>
         {state.loading ? (
@@ -78,8 +98,8 @@ const CategoriesList = () => {
             <thead className='rounded rounded-5'>
               <tr className='table-secondary h-md rounded rounded-5'>
                 <th className='w-10 align-middle'>#</th>
-                <th className='align-middle'>Category Name</th>
-                <th className='align-middle'>Category Date</th>
+                <th className='align-middle'>Name</th>
+                <th className='align-middle'>Date</th>
                 <th className='w-10 text-center align-middle'>Actions</th>
               </tr>
             </thead>
@@ -149,6 +169,36 @@ const CategoriesList = () => {
           </Table>
         )}
       </div>
+
+      {/* Pagination */}
+      <Pagination className='d-flex justify-content-start '>
+        <Pagination.First
+          onClick={() => setPagination(1, state.pageSize)}
+          disabled={currentPage === 1}
+        />
+        <Pagination.Prev
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+        />
+        {totalPages > 0 &&
+          Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <Pagination.Item
+              key={page}
+              active={page === currentPage}
+              onClick={() => setPagination(page, state.pageSize)}
+            >
+              {page}
+            </Pagination.Item>
+          ))}
+        <Pagination.Next
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+        />
+        <Pagination.Last
+          onClick={() => setPagination(totalPages, state.pageSize)}
+          disabled={currentPage === totalPages}
+        />
+      </Pagination>
 
       {/* Actions Modal */}
       <CategoryFormModal type={type} actionCategory={actionCategory} />

@@ -2,6 +2,11 @@
 const initialState = {
   categories: [],
   loading: false,
+  pageNumber: 1,
+  pageSize: 10,
+  filter: '',
+  totalNumberOfRecords: 0,
+  totalNumberOfPages: 0,
 }
 
 // Reducer function
@@ -10,9 +15,23 @@ function categoriesReducer(state = initialState, action) {
     case 'GET_CATEGORIES':
       return { ...state, loading: true } // Set loading to true before fetching categories
     case 'GET_CATEGORIES_SUCCESS':
-      return { ...state, categories: action.payload, loading: false } // Set loading to false after successful fetch
+      return {
+        ...state,
+        categories: action.payload.data,
+        totalNumberOfRecords: action.payload.totalNumberOfRecords,
+        totalNumberOfPages: action.payload.totalNumberOfPages,
+        loading: false,
+      } // Set loading to false after successful fetch
     case 'GET_CATEGORIES_FAILURE':
       return { ...state, loading: false } // Set loading to false if fetching fails
+    case 'SET_FILTER':
+      return { ...state, filter: action.payload }
+    case 'SET_PAGINATION':
+      return {
+        ...state,
+        pageNumber: action.payload.pageNumber,
+        pageSize: action.payload.pageSize,
+      }
     case 'ADD_CATEGORY':
       return { ...state, loading: true } // Set loading to true before adding a category
     case 'ADD_CATEGORY_SUCCESS':

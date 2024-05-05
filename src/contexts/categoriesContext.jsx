@@ -11,6 +11,11 @@ export const CategoriesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(categoriesReducer, {
     categories: [],
     loading: false,
+    pageNumber: 1,
+    pageSize: 10,
+    filter: '',
+    totalNumberOfRecords: 0,
+    totalNumberOfPages: 0,
   })
 
   return (

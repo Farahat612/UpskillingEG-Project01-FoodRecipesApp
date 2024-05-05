@@ -7,15 +7,23 @@ const useCategories = () => {
   const { dispatch } = useContext(CategoriesContext)
 
   // Defining the CRUD operations
-  const getCategories = async () => {
+  const getCategories = async (pageNumber, pageSize, filter) => {
     try {
       dispatch({ type: 'GET_CATEGORIES' }) // Dispatch action to set loading to true
-      const response = await apiProtected.get('/Category')
-      dispatch({ type: 'GET_CATEGORIES_SUCCESS', payload: response.data.data }) // Dispatch action on successful fetch
+      const response = await apiProtected.get('/Category', {
+        params: { pageNumber, pageSize, name: filter },
+      })
+      dispatch({ type: 'GET_CATEGORIES_SUCCESS', payload: response.data }) // Dispatch action on successful fetch
     } catch (error) {
       dispatch({ type: 'GET_CATEGORIES_FAILURE' }) // Dispatch action if fetch fails
       console.error('Error fetching categories:', error.response.data.message)
     }
+  }
+  const setFilter = (filter) => {
+    dispatch({ type: 'SET_FILTER', payload: filter })
+  }
+  const setPagination = (pageNumber, pageSize) => {
+    dispatch({ type: 'SET_PAGINATION', payload: { pageNumber, pageSize } })
   }
 
   const addCategory = async (newCategory) => {
@@ -54,7 +62,14 @@ const useCategories = () => {
     }
   }
 
-  return { getCategories, addCategory, updateCategory, deleteCategory }
+  return {
+    getCategories,
+    addCategory,
+    updateCategory,
+    deleteCategory,
+    setFilter,
+    setPagination,
+  }
 }
 // Step 5: Export the hook
 export default useCategories
