@@ -86,7 +86,7 @@ const useRecipes = () => {
     try {
       dispatch({ type: 'GET_RECIPE_BY_ID' })
       const response = await apiProtected.get(`/Recipe/${id}`)
-      console.log('response', response)
+      // console.log('response', response)
       dispatch({ type: 'GET_RECIPE_BY_ID_SUCCESS', payload: response.data })
     } catch (error) {
       dispatch({ type: 'GET_RECIPE_BY_ID_FAILURE' })

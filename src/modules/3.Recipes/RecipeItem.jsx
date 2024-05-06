@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useContext } from 'react'
 import { useRecipes } from '../../hooks/recipes'
 import { RecipesContext } from '../../contexts/recipesContext'

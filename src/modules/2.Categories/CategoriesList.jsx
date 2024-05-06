@@ -67,15 +67,17 @@ const CategoriesList = () => {
       </div>
 
       {/* Filteration By name */}
-      <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
-        <input
-          type='text'
-          className='form-control'
-          placeholder='Search by name'
-          value={state.filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
-      </div>
+      {!state.loading && (
+        <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Search by name'
+            value={state.filter}
+            onChange={(e) => setFilter(e.target.value)}
+          />
+        </div>
+      )}
 
       {/* Categories Table */}
       <div className='categories-table'>
