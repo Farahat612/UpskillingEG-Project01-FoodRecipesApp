@@ -2,8 +2,9 @@
 import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RecipesContext } from '../../contexts/recipesContext'
-import { useModal } from '../../contexts/modalContext'
 import { CategoriesContext } from '../../contexts/categoriesContext'
+import { TagsContext } from '../../contexts/tagsContext'
+import { useModal } from '../../contexts/modalContext'
 import { useRecipes } from '../../hooks/recipes'
 import { useCategories } from '../../hooks/categories'
 import { staticURL } from '../../utils/api'
@@ -27,6 +28,8 @@ const RecipesList = () => {
       ? categoriesState.totalNumberOfRecords
       : 15
   const { getCategories } = useCategories()
+  // tags for filteration
+  const { state: tagsState } = useContext(TagsContext)
   // recipes
   const { state } = useContext(RecipesContext)
   const {
@@ -44,7 +47,8 @@ const RecipesList = () => {
       state.pageNumber,
       state.pageSize,
       state.filter,
-      state.selectedCategoryId
+      state.selectedCategoryId,
+      state.selectedTagId
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -52,6 +56,7 @@ const RecipesList = () => {
     state.pageSize,
     state.filter,
     state.selectedCategoryId,
+    state.selectedTagId,
     // categoriesState.totalNumberOfRecords,
   ])
 
@@ -105,6 +110,20 @@ const RecipesList = () => {
           {categoriesState.categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}
+            </option>
+          ))}
+        </select>
+
+        {/* 03 Filteration By Tag */}
+        <select
+          className='form-select'
+          value={state.selectedTagId ? state.selectedTagId : ''}
+          onChange={(e) => setTagFilter(e.target.value)}
+        >
+          <option value=''>All Tags</option>
+          {tagsState.tags.map((tag) => (
+            <option key={tag.id} value={tag.id}>
+              {tag.name}
             </option>
           ))}
         </select>
