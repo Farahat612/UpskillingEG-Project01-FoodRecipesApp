@@ -6,7 +6,7 @@ import { DeleteData } from '../../components/shared'
 import { Form, Button, Modal } from 'react-bootstrap'
 import { IoClose } from 'react-icons/io5'
 
-const CategoryForm = () => {
+const CategoryFormModal = () => {
   // Modal context
   const { isCategoryModalOpen, closeCategoryModal, type, actionCategory } =
     useModal()
@@ -48,7 +48,7 @@ const CategoryForm = () => {
         style={{
           minHeight: '25vh',
         }}
-        className='d-flex flex-column gap-5 p-4'
+        className='d-flex flex-column '
       >
         <h3>
           {type === 'add'
@@ -58,7 +58,7 @@ const CategoryForm = () => {
             : 'Delete Category'}
         </h3>
         {type === 'add' || type === 'edit' ? (
-          <Form onSubmit={handleSubmit(onSubmit)} className='h-75'>
+          <Form onSubmit={handleSubmit(onSubmit)} className='h-75 mt-5'>
             <Form.Group className='mb-5' controlId='exampleForm.ControlInput1'>
               <Form.Label>Category Name</Form.Label>
               <Form.Control
@@ -112,4 +112,4 @@ const CategoryForm = () => {
   )
 }
 
-export default CategoryForm
+export default CategoryFormModal

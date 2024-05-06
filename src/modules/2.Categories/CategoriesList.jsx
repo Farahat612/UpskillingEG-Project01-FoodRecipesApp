@@ -21,13 +21,7 @@ const CategoriesList = () => {
   }, [state.pageNumber, state.pageSize, state.filter])
 
   // Actions Modal
-  const {
-    openCategoryModal,
-    type,
-    setType,
-    actionCategory,
-    setActionCategory,
-  } = useModal()
+  const { openCategoryModal, setType, setActionCategory } = useModal()
 
   const actionTriggersClick = (e, category) => {
     const action = e.target.id
@@ -205,7 +199,7 @@ const CategoriesList = () => {
       )}
 
       {/* Actions Modal */}
-      <CategoryFormModal type={type} actionCategory={actionCategory} />
+      <CategoryFormModal />
     </MasterLayout>
   )
 }

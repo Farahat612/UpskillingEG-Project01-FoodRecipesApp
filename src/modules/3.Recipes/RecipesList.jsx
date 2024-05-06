@@ -2,6 +2,7 @@
 import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RecipesContext } from '../../contexts/recipesContext'
+import { useModal } from '../../contexts/modalContext'
 import { CategoriesContext } from '../../contexts/categoriesContext'
 import { useRecipes } from '../../hooks/recipes'
 import { useCategories } from '../../hooks/categories'
@@ -9,6 +10,7 @@ import { staticURL } from '../../utils/api'
 
 import { MasterLayout } from '../../layouts'
 import { Header, Banner, LoadingScreen, NoData } from '../../components/shared'
+import { DeleteRecipeItem } from './'
 import Svg from '../../assets/header/others.svg'
 import nodataImg from '../../assets/images/no-data.png'
 import { Table, Pagination } from 'react-bootstrap'
@@ -20,6 +22,10 @@ const RecipesList = () => {
   const navigate = useNavigate()
   // categories for filteration
   const { state: categoriesState } = useContext(CategoriesContext)
+  let categoriesTotal =
+    categoriesState.totalNumberOfRecords != 0
+      ? categoriesState.totalNumberOfRecords
+      : 15
   const { getCategories } = useCategories()
   // recipes
   const { state } = useContext(RecipesContext)
@@ -33,10 +39,7 @@ const RecipesList = () => {
 
   // get categories and recipes
   useEffect(() => {
-    getCategories(
-      categoriesState.pageNumber,
-      categoriesState.totalNumberOfRecords
-    )
+    getCategories(categoriesState.pageNumber, categoriesTotal)
     getRecipes(
       state.pageNumber,
       state.pageSize,
@@ -62,6 +65,9 @@ const RecipesList = () => {
   let totalPages = Math.ceil(state.totalNumberOfRecords / state.pageSize)
   let currentPage = state.pageNumber
 
+  // delete modal
+  const { openDeleteModal, setActionRecipe } = useModal()
+
   return (
     <MasterLayout>
       {/* Header and Banner */}
@@ -78,7 +84,7 @@ const RecipesList = () => {
         </Banner>
       </div>
 
-      {/* Filteration goes here */}
+      {/* Filteration */}
       <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
         {/* 01 Filteration By name */}
         <input
@@ -140,7 +146,12 @@ const RecipesList = () => {
                             : nodataImg
                         }
                         alt={recipe.imagePath ? recipe.name : 'No Image'}
-                        className='img-fluid'
+                        className='img-fluid '
+                        style={{
+                          width: '70px',
+                          height: '40px',
+                          objectFit: 'cover',
+                        }}
                       />
                     </td>
                     <td>{recipe.price}</td>
@@ -190,9 +201,10 @@ const RecipesList = () => {
                             <p
                               className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center m-0'
                               id='delete-recipe'
-                              // onClick={() =>
-                              //   handleDeleteClick(recipe.id, recipe.name)
-                              // }
+                              onClick={() => {
+                                setActionRecipe(recipe)
+                                openDeleteModal()
+                              }}
                             >
                               <FaTrashAlt className='pe-none' />
                               <span className='text-dark pe-none'>Delete</span>
@@ -248,6 +260,9 @@ const RecipesList = () => {
           />
         </Pagination>
       )}
+
+      {/* Delete Modal */}
+      <DeleteRecipeItem />
     </MasterLayout>
   )
 }

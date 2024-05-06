@@ -31,6 +31,18 @@ const ModalProvider = ({ children }) => {
     setIsCategoryModalOpen(false)
   }
 
+  // Delete Recipe Modal
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const [actionRecipe, setActionRecipe] = useState(null)
+  // Function to open the modal
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true)
+  }
+  // Function to close the modal
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false)
+  }
+
   // Provide the modal state and functions to the children components
   return (
     <ModalContext.Provider
@@ -45,6 +57,11 @@ const ModalProvider = ({ children }) => {
         setType,
         actionCategory,
         setActionCategory,
+        isDeleteModalOpen,
+        openDeleteModal,
+        closeDeleteModal,
+        actionRecipe,
+        setActionRecipe,
       }}
     >
       {children}
