@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { CategoriesContext } from '../../contexts/categoriesContext'
 import { useModal } from '../../contexts/modalContext'
 import { useCategories } from '../../hooks/categories'
@@ -21,11 +21,17 @@ const CategoriesList = () => {
   }, [state.pageNumber, state.pageSize, state.filter])
 
   // Actions Modal
-  const { openCategoryModal } = useModal()
-  const [type, setType] = useState('add')
-  const [actionCategory, setActionCategory] = useState(null)
+  const {
+    openCategoryModal,
+    type,
+    setType,
+    actionCategory,
+    setActionCategory,
+  } = useModal()
+
   const actionTriggersClick = (e, category) => {
     const action = e.target.id
+    console.log(action, category?.name)
     setActionCategory(category)
     switch (action) {
       case 'edit-category':
@@ -35,7 +41,7 @@ const CategoriesList = () => {
         setType('delete')
         break
       default:
-        break
+        setType('add')
     }
     openCategoryModal()
   }
@@ -60,11 +66,7 @@ const CategoriesList = () => {
           imgUrl={Svg}
         />
 
-        <Banner
-          buttonTitle='Add Category'
-          btnId={'add-category'}
-          setType={setType}
-        >
+        <Banner buttonTitle='Add Category' btnId={'add-category'}>
           <h4>Categories Table Details</h4>
           <p>you can check all categories details here!</p>
         </Banner>
@@ -137,8 +139,8 @@ const CategoriesList = () => {
                               id='edit-category'
                               onClick={(e) => actionTriggersClick(e, category)}
                             >
-                              <FaEdit />
-                              <span className='text-dark'>Edit</span>
+                              <FaEdit className='pe-none' />
+                              <span className='text-dark pe-none'>Edit</span>
                             </p>
                           </li>
                           <li>
@@ -147,8 +149,8 @@ const CategoriesList = () => {
                               id='delete-category'
                               onClick={(e) => actionTriggersClick(e, category)}
                             >
-                              <FaTrashAlt />
-                              <span className='text-dark'>Delete</span>
+                              <FaTrashAlt className='pe-none' />
+                              <span className='text-dark pe-none'>Delete</span>
                             </p>
                           </li>
                         </ul>

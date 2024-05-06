@@ -45,22 +45,22 @@ function App() {
       <Router>
         <Routes>
           {/* <Route path='/' element={<RouteGuard />}> */}
-          <Route index element={<Dashboard />} />
-          <Route index path='dashboard' element={<Dashboard />} />
-          <Route path='categories' element={<CategoriesList />} />
-          <Route path='recipes' element={<RecipesList />} />
-          <Route path='addRecipe' element={<AddRecipeItem />} />
-          <Route path='editRecipe/:id' element={<EditRecipeItem />} />
-          <Route path='recipeItem/:id' element={<RecipeItem />} />
-          <Route path='users' element={<UsersList />} />
+            <Route index element={<Dashboard />} />
+            <Route index path='dashboard' element={<Dashboard />} />
+            <Route path='categories' element={<CategoriesList />} />
+            <Route path='recipes' element={<RecipesList />} />
+            <Route path='addRecipe' element={<AddRecipeItem />} />
+            <Route path='editRecipe/:id' element={<EditRecipeItem />} />
+            <Route path='recipeItem/:id' element={<RecipeItem />} />
+            <Route path='users' element={<UsersList />} />
           {/* </Route> */}
-          {/* <Route path='/' element={<PublicRouteGuard />}> */}
+
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
           <Route path='verifyPass' element={<VerifyPass />} />
           <Route path='forgotPass' element={<ForgotPass />} />
           <Route path='resetPass' element={<ResetPass />} />
-          {/* </Route> */}
+
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>

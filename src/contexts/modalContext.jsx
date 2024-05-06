@@ -20,6 +20,8 @@ const ModalProvider = ({ children }) => {
 
   // Category Actions Modal
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
+  const [type, setType] = useState('add')
+  const [actionCategory, setActionCategory] = useState(null)
   // Function to open the modal
   const openCategoryModal = () => {
     setIsCategoryModalOpen(true)
@@ -39,6 +41,10 @@ const ModalProvider = ({ children }) => {
         isCategoryModalOpen,
         openCategoryModal,
         closeCategoryModal,
+        type,
+        setType,
+        actionCategory,
+        setActionCategory,
       }}
     >
       {children}

@@ -1,15 +1,15 @@
 import { useForm } from 'react-hook-form'
 import { useModal } from '../../contexts/modalContext'
 import { useCategories } from '../../hooks/categories'
-import PropTypes from 'prop-types'
 
 import { DeleteData } from '../../components/shared'
 import { Form, Button, Modal } from 'react-bootstrap'
 import { IoClose } from 'react-icons/io5'
 
-const CategoryForm = ({ type, actionCategory }) => {
+const CategoryForm = () => {
   // Modal context
-  const { isCategoryModalOpen, closeCategoryModal } = useModal()
+  const { isCategoryModalOpen, closeCategoryModal, type, actionCategory } =
+    useModal()
   // Categories hooks
   const { addCategory, updateCategory, deleteCategory } = useCategories()
   // Form validation
@@ -17,6 +17,7 @@ const CategoryForm = ({ type, actionCategory }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm()
 
   const onSubmit = (data) => {
@@ -26,6 +27,7 @@ const CategoryForm = ({ type, actionCategory }) => {
       updateCategory({ ...data, id: actionCategory.id })
     }
     closeCategoryModal()
+    reset()
   }
   return (
     <Modal
@@ -35,21 +37,26 @@ const CategoryForm = ({ type, actionCategory }) => {
       keyboard={false}
       centered
     >
-      <Modal.Header>
-        <Modal.Title>
+      <IoClose
+        className='close-icon'
+        onClick={() => {
+          closeCategoryModal()
+          reset()
+        }}
+      />
+      <Modal.Body
+        style={{
+          minHeight: '25vh',
+        }}
+        className='d-flex flex-column gap-5 p-4'
+      >
+        <h3>
           {type === 'add'
             ? 'Add Category'
             : type === 'edit'
             ? 'Edit Category'
             : 'Delete Category'}
-        </Modal.Title>
-      </Modal.Header>
-      <IoClose className='close-icon' onClick={closeCategoryModal} />
-      <Modal.Body
-        style={{
-          minHeight: '25vh',
-        }}
-      >
+        </h3>
         {type === 'add' || type === 'edit' ? (
           <Form onSubmit={handleSubmit(onSubmit)} className='h-75'>
             <Form.Group className='mb-5' controlId='exampleForm.ControlInput1'>
@@ -59,9 +66,7 @@ const CategoryForm = ({ type, actionCategory }) => {
                 placeholder='Ex: Pasta'
                 autoFocus
                 {...register('name', { required: 'Name is required' })}
-                defaultValue={
-                  type == 'edit' && actionCategory ? actionCategory.name : ''
-                }
+                defaultValue={type == 'edit' ? actionCategory.name : ''}
               />
               {errors.name && (
                 <div className='alert alert-danger mt-2 py-1 '>
@@ -108,8 +113,3 @@ const CategoryForm = ({ type, actionCategory }) => {
 }
 
 export default CategoryForm
-
-CategoryForm.propTypes = {
-  type: PropTypes.string.isRequired,
-  actionCategory: PropTypes.object,
-}
