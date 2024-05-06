@@ -2,7 +2,9 @@
 import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RecipesContext } from '../../contexts/recipesContext'
+import { CategoriesContext } from '../../contexts/categoriesContext'
 import { useRecipes } from '../../hooks/recipes'
+import { useCategories } from '../../hooks/categories'
 import { staticURL } from '../../utils/api'
 
 import { MasterLayout } from '../../layouts'
@@ -14,7 +16,12 @@ import { FaEdit, FaTrashAlt, FaEye } from 'react-icons/fa'
 import { IoEllipsisHorizontal } from 'react-icons/io5'
 
 const RecipesList = () => {
+  // navigate
   const navigate = useNavigate()
+  // categories for filteration
+  const { state: categoriesState } = useContext(CategoriesContext)
+  const { getCategories } = useCategories()
+  // recipes
   const { state } = useContext(RecipesContext)
   const {
     getRecipes,
@@ -24,10 +31,26 @@ const RecipesList = () => {
     setTagFilter,
   } = useRecipes()
 
+  // get categories and recipes
   useEffect(() => {
-    getRecipes(state.pageNumber, state.pageSize, state.filter)
+    getCategories(
+      categoriesState.pageNumber,
+      categoriesState.totalNumberOfRecords
+    )
+    getRecipes(
+      state.pageNumber,
+      state.pageSize,
+      state.filter,
+      state.selectedCategoryId
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.pageNumber, state.pageSize, state.filter])
+  }, [
+    state.pageNumber,
+    state.pageSize,
+    state.filter,
+    state.selectedCategoryId,
+    categoriesState.totalNumberOfRecords,
+  ])
 
   // pagination
   const handleNextPage = () => {
@@ -56,8 +79,8 @@ const RecipesList = () => {
       </div>
 
       {/* Filteration goes here */}
-      {/* 01 Filteration By name */}
       <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
+        {/* 01 Filteration By name */}
         <input
           type='text'
           className='form-control'
@@ -65,6 +88,20 @@ const RecipesList = () => {
           value={state.filter}
           onChange={(e) => setFilter(e.target.value)}
         />
+
+        {/* 02 Filteration By Category */}
+        <select
+          className='form-select'
+          value={state.selectedCategoryId ? state.selectedCategoryId : ''}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+        >
+          <option value=''>Select Category</option>
+          {categoriesState.categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Recipes Table */}
@@ -181,7 +218,7 @@ const RecipesList = () => {
       </div>
 
       {/* Pagination */}
-      {!state.loading && (
+      {!state.loading && state.recipes.length > 10 && (
         <Pagination className='d-flex justify-content-start '>
           <Pagination.First
             onClick={() => setPagination(1, state.pageSize)}
