@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 // react-hook-form
 import { useForm } from 'react-hook-form'
 // axios
-import axios from 'axios'
+import { apiPublic } from '../../utils/api.js'
 // toast
 import { notify } from '../../utils/notify'
 
@@ -43,10 +43,7 @@ const useRegister = () => {
     const formData = appendFormData(data)
     try {
       setBtnLoading(true)
-      const response = await axios.post(
-        'https://upskilling-egypt.com:3006/api/v1/Users/Register',
-        formData
-      )
+      const response = await apiPublic.post('/Users/Register', formData)
       notify('success', response.data.message)
       navigate('/verifyPass')
     } catch (error) {

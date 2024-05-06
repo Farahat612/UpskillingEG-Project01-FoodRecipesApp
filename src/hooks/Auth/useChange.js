@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 // context
 import { useAuth } from '../../contexts/authContext'
 // axios
-import axios from 'axios'
+import { apiPublic } from '../../utils/api.js'
 // toast
 import { notify } from '../../utils/notify'
 
@@ -37,13 +37,9 @@ const useChange = () => {
     try {
       // * Start Loading
       setBtnLoading(true)
-      const response = await axios.put(
-        'https://upskilling-egypt.com:3006/api/v1/Users/ChangePassword',
-        data,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        }
-      )
+      const response = await apiPublic.post('/Users/ChangePassword', data, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
       console.log(response.data)
       // * Success:
       // Show success message

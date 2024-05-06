@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 // react-hook-form
 import { useForm } from 'react-hook-form'
 // axios
-import axios from 'axios'
+import { apiPublic } from '../../utils/api.js'
 // toast
 import { notify } from '../../utils/notify'
 
@@ -33,10 +33,7 @@ const useReset = () => {
     try {
       // * Start Loading
       setBtnLoading(true)
-      const response = await axios.post(
-        'https://upskilling-egypt.com:3006/api/v1/Users/Reset',
-        data
-      )
+      const response = await apiPublic.post('/Users/Reset', data)
       console.log(response.data)
       // * Success:
       // Show success message

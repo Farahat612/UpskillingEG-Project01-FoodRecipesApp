@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 // react-hook-form
 import { useForm } from 'react-hook-form'
 // axios
-import axios from 'axios'
+import { apiPublic } from '../../utils/api.js'
 // toast
 import { notify } from '../../utils/notify'
 
@@ -27,10 +27,7 @@ const useVerify = () => {
     // API call
     try {
       setBtnLoading(true)
-      const response = await axios.put(
-        'https://upskilling-egypt.com:3006/api/v1/Users/verify',
-        data
-      )
+      const response = await apiPublic.post('/Users/verify', data)
 
       // * Success:
       // Show success message

@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 // context
 import { useAuth } from '../../contexts/authContext'
 // axios
-import axios from 'axios'
+import { apiPublic } from '../../utils/api.js' // for making API calls
 // toast
 import { notify } from '../../utils/notify'
 
@@ -36,10 +36,7 @@ const useLogin = () => {
       // * Start Loading
       setBtnLoading(true)
       // API call
-      const response = await axios.post(
-        'https://upskilling-egypt.com:3006/api/v1/Users/Login',
-        data
-      )
+      const response = await apiPublic.post('/Users/Login', data)
       console.log(response.data)
       // * Success:
       // Save token in local storage
