@@ -10,6 +10,7 @@ export const RecipesContext = createContext()
 export const RecipesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(recipesReducer, {
     recipes: [],
+    selectedRecipe: {},
     loading: false,
     pageNumber: 1,
     pageSize: 10,

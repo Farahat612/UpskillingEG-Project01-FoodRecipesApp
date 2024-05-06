@@ -1,8 +1,151 @@
+/* eslint-disable no-unused-vars */
+import { useEffect, useContext } from 'react'
+import { useRecipes } from '../../hooks/recipes'
+import { RecipesContext } from '../../contexts/recipesContext'
+import { useModal } from '../../contexts/modalContext'
+import { staticURL } from '../../utils/api'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { MasterLayout } from '../../layouts'
+import { DeleteRecipeItem } from './'
+import { Button, Spinner, Card, Table } from 'react-bootstrap'
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'
+import nodataImg from '../../assets/images/no-data.png'
+
 const RecipeItem = () => {
+  const navigate = useNavigate()
+  // getting the id from the url
+  const { id } = useParams()
+  const { state } = useContext(RecipesContext)
+  const { getRecipeById } = useRecipes()
+
+  // getting the recipe by id
+  useEffect(() => {
+    getRecipeById(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
+
+  const { openDeleteModal, setActionRecipe } = useModal()
+
+  if (state.loading) {
+    return (
+      <MasterLayout>
+        <div className='d-flex flex-column h-100 justify-content-center align-items-center'>
+          <Spinner
+            as='span'
+            animation='grow'
+            size='2xl'
+            role='status'
+            aria-hidden='true'
+            variant='success'
+          />
+          <h3 className='mt-3 text-success'>Loading Recipe ...</h3>
+        </div>
+      </MasterLayout>
+    )
+  }
+
   return (
-    <div>
-      <h1>Recipe Item</h1>
-    </div>
+    <MasterLayout>
+      <div>
+        <div className='button p-3'>
+          <Button
+            variant='dark'
+            className='btn btn-success px-4 d-flex align-items-center gap-3'
+            onClick={() => navigate('/recipes')}
+          >
+            <i className='fas fa-arrow-left d-inline-block'></i>
+            Back To Recipes
+          </Button>
+        </div>
+
+        <div className='container mt-5'>
+          <div className='d-flex justify-content-between align-items-center mb-3'>
+            <div className='content'>
+              <h3 className='text-dark'>
+                Recipe #{state.selectedRecipe?.id} Details
+              </h3>
+            </div>
+            <div className='d-flex justify-content-end  gap-3'>
+              <Button
+                variant='success'
+                className=' px-4 d-flex align-items-center gap-3'
+                id='add-category'
+                onClick={() => navigate(`/editRecipe/${id}`)}
+              >
+                <FaEdit />
+                Edit
+              </Button>
+              <Button
+                variant='danger'
+                className=' px-4 d-flex align-items-center gap-3'
+                id='add-category'
+                onClick={() => {
+                  setActionRecipe(state.selectedRecipe)
+                  openDeleteModal()
+                }}
+              >
+                <FaTrashAlt />
+                Delete
+              </Button>
+            </div>
+          </div>
+          {state.selectedRecipe && (
+            <Card>
+              <Card.Img
+                variant='top'
+                src={
+                  state.selectedRecipe.imagePath
+                    ? `${staticURL}/${state.selectedRecipe.imagePath}`
+                    : nodataImg
+                }
+              />
+              <Card.Body>
+                <Table striped hover borderless responsive>
+                  <tbody>
+                    <tr>
+                      <td>Recipe Name</td>
+                      <td>{state.selectedRecipe.name}</td>
+                    </tr>
+                    <tr>
+                      <td>Category</td>
+                      {Array.isArray(state.selectedRecipe.category) &&
+                      state.selectedRecipe.category?.length > 1 ? (
+                        <td>{state.selectedRecipe.category[0]?.name}</td>
+                      ) : (
+                        <td>No Category</td>
+                      )}
+                    </tr>
+                    <tr>
+                      <td>Tag</td>
+                      <td>{state.selectedRecipe.tag?.name}</td>
+                    </tr>
+                    <tr>
+                      <td>Price</td>
+                      <td>{state.selectedRecipe.price} EGP</td>
+                    </tr>
+                    <tr>
+                      <td>Description</td>
+                      <td>{state.selectedRecipe.description}</td>
+                    </tr>
+                    <tr>
+                      <td>Created at</td>
+                      <td>
+                        {new Date(
+                          state.selectedRecipe.creationDate
+                        ).toLocaleDateString('en-US')}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Card.Body>
+            </Card>
+          )}
+        </div>
+
+        <DeleteRecipeItem />
+      </div>
+    </MasterLayout>
   )
 }
 

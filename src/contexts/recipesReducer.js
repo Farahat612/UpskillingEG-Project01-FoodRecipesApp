@@ -1,6 +1,7 @@
 // Initial state
 const initialState = {
   recipes: [],
+  selectedRecipe: {},
   loading: false,
   pageNumber: 1,
   pageSize: 10,
@@ -44,7 +45,7 @@ function recipesReducer(state = initialState, action) {
       return {
         ...state,
         recipes: [action.payload, ...state.recipes],
-        loading: false, 
+        loading: false,
       }
     case 'ADD_RECIPE_FAILURE':
       return { ...state, loading: false }
@@ -56,7 +57,7 @@ function recipesReducer(state = initialState, action) {
         recipes: state.recipes.map((recipe) =>
           recipe.id === action.payload.id ? action.payload : recipe
         ),
-        loading: false, 
+        loading: false,
       }
     case 'UPDATE_RECIPE_FAILURE':
       return { ...state, loading: false }
@@ -65,12 +66,16 @@ function recipesReducer(state = initialState, action) {
     case 'DELETE_RECIPE_SUCCESS':
       return {
         ...state,
-        recipes: state.recipes.filter(
-          (recipe) => recipe.id !== action.payload
-        ),
-        loading: false, 
+        recipes: state.recipes.filter((recipe) => recipe.id !== action.payload),
+        loading: false,
       }
     case 'DELETE_RECIPE_FAILURE':
+      return { ...state, loading: false }
+    case 'GET_RECIPE_BY_ID':
+      return { ...state, loading: true }
+    case 'GET_RECIPE_BY_ID_SUCCESS':
+      return { ...state, selectedRecipe: action.payload, loading: false }
+    case 'GET_RECIPE_BY_ID_FAILURE':
       return { ...state, loading: false }
     default:
       return state

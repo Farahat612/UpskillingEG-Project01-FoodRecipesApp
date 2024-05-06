@@ -82,6 +82,18 @@ const useRecipes = () => {
     }
   }
 
+  const getRecipeById = async (id) => {
+    try {
+      dispatch({ type: 'GET_RECIPE_BY_ID' })
+      const response = await apiProtected.get(`/Recipe/${id}`)
+      console.log('response', response)
+      dispatch({ type: 'GET_RECIPE_BY_ID_SUCCESS', payload: response.data })
+    } catch (error) {
+      dispatch({ type: 'GET_RECIPE_BY_ID_FAILURE' })
+      notify('error', `Error fetching recipe - ${error.response.data.message}`)
+    }
+  }
+
   return {
     getRecipes,
     addRecipe,
@@ -91,6 +103,7 @@ const useRecipes = () => {
     setPagination,
     setCategoryFilter,
     setTagFilter,
+    getRecipeById,
   }
 }
 
