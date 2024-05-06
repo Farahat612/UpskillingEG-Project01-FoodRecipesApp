@@ -173,7 +173,7 @@ const CategoriesList = () => {
       </div>
 
       {/* Pagination */}
-      {!state.loading && (
+      {!state.loading && state.totalNumberOfRecords >= 10 && (
         <Pagination className='d-flex justify-content-start '>
           <Pagination.First
             onClick={() => setPagination(1, state.pageSize)}

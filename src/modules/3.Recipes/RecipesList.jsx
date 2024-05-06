@@ -49,7 +49,7 @@ const RecipesList = () => {
     state.pageSize,
     state.filter,
     state.selectedCategoryId,
-    categoriesState.totalNumberOfRecords,
+    // categoriesState.totalNumberOfRecords,
   ])
 
   // pagination
@@ -95,7 +95,7 @@ const RecipesList = () => {
           value={state.selectedCategoryId ? state.selectedCategoryId : ''}
           onChange={(e) => setCategoryFilter(e.target.value)}
         >
-          <option value=''>Select Category</option>
+          <option value=''>All Categories</option>
           {categoriesState.categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}
@@ -218,7 +218,7 @@ const RecipesList = () => {
       </div>
 
       {/* Pagination */}
-      {!state.loading && state.recipes.length > 10 && (
+      {!state.loading && state.totalNumberOfRecords >= 10 && (
         <Pagination className='d-flex justify-content-start '>
           <Pagination.First
             onClick={() => setPagination(1, state.pageSize)}
