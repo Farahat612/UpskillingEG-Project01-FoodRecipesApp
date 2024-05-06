@@ -1,5 +1,4 @@
 import RouteGuard from './RouteGuard'
-import PublicRouteGuard from './PuplicRouteGuard'
 import NotFound from './NotFound'
 import LoadingScreen from './LoadingScreen'
 import LoadingSpinner from './LoadingSpinner'
@@ -13,7 +12,6 @@ import DeleteData from './DeleteData'
 
 export {
   RouteGuard,
-  PublicRouteGuard,
   NotFound,
   LoadingScreen,
   LoadingSpinner,

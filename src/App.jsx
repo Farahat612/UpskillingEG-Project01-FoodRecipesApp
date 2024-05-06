@@ -8,7 +8,7 @@ import { useAuth } from './contexts/authContext'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // components
-import { NotFound } from './components/shared'
+import { NotFound, RouteGuard } from './components/shared'
 // Auth
 import {
   Login,
@@ -44,7 +44,7 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-          {/* <Route path='/' element={<RouteGuard />}> */}
+          <Route path='/' element={<RouteGuard mode='private' />}>
             <Route index element={<Dashboard />} />
             <Route index path='dashboard' element={<Dashboard />} />
             <Route path='categories' element={<CategoriesList />} />
@@ -53,13 +53,15 @@ function App() {
             <Route path='editRecipe/:id' element={<EditRecipeItem />} />
             <Route path='recipeItem/:id' element={<RecipeItem />} />
             <Route path='users' element={<UsersList />} />
-          {/* </Route> */}
+          </Route>
 
-          <Route path='login' element={<Login />} />
-          <Route path='register' element={<Register />} />
-          <Route path='verifyPass' element={<VerifyPass />} />
-          <Route path='forgotPass' element={<ForgotPass />} />
-          <Route path='resetPass' element={<ResetPass />} />
+          <Route element={<RouteGuard mode='public' />}>
+            <Route path='login' element={<Login />} />
+            <Route path='register' element={<Register />} />
+            <Route path='verifyPass' element={<VerifyPass />} />
+            <Route path='forgotPass' element={<ForgotPass />} />
+            <Route path='resetPass' element={<ResetPass />} />
+          </Route>
 
           <Route path='*' element={<NotFound />} />
         </Routes>
