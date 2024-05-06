@@ -25,9 +25,19 @@ const RecipesList = () => {
   } = useRecipes()
 
   useEffect(() => {
-    getRecipes(state.pageNumber, state.pageSize)
+    getRecipes(state.pageNumber, state.pageSize, state.filter)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.pageNumber, state.pageSize])
+  }, [state.pageNumber, state.pageSize, state.filter])
+
+  // pagination
+  const handleNextPage = () => {
+    setPagination(state.pageNumber + 1, state.pageSize)
+  }
+  const handlePreviousPage = () => {
+    setPagination(state.pageNumber - 1, state.pageSize)
+  }
+  let totalPages = Math.ceil(state.totalNumberOfRecords / state.pageSize)
+  let currentPage = state.pageNumber
 
   return (
     <MasterLayout>
@@ -46,8 +56,18 @@ const RecipesList = () => {
       </div>
 
       {/* Filteration goes here */}
+      {/* 01 Filteration By name */}
+      <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Search by name'
+          value={state.filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
+      </div>
 
-      {/* Categories Table */}
+      {/* Recipes Table */}
       <div className='recipes-table'>
         {state.loading ? (
           <div className='w-100 h-100 my-5 py-5 d-flex flex-column justify-content-center align-items-center gap-3'>
@@ -159,6 +179,38 @@ const RecipesList = () => {
           </Table>
         )}
       </div>
+
+      {/* Pagination */}
+      {!state.loading && (
+        <Pagination className='d-flex justify-content-start '>
+          <Pagination.First
+            onClick={() => setPagination(1, state.pageSize)}
+            disabled={currentPage === 1}
+          />
+          <Pagination.Prev
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          />
+          {totalPages > 0 &&
+            Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Pagination.Item
+                key={page}
+                active={page === currentPage}
+                onClick={() => setPagination(page, state.pageSize)}
+              >
+                {page}
+              </Pagination.Item>
+            ))}
+          <Pagination.Next
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          />
+          <Pagination.Last
+            onClick={() => setPagination(totalPages, state.pageSize)}
+            disabled={currentPage === totalPages}
+          />
+        </Pagination>
+      )}
     </MasterLayout>
   )
 }
