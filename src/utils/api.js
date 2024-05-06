@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const baseURL = 'https://upskilling-egypt.com:3006/api/v1'
+const staticURL = 'https://upskilling-egypt.com:3006'
 const token = `Bearer ${localStorage.getItem('token')}`
 
 // axios instance without token
@@ -20,4 +21,4 @@ const apiProtected = axios.create({
   },
 })
 
-export { apiPublic, apiProtected, baseURL }
+export { apiPublic, apiProtected, baseURL, staticURL }

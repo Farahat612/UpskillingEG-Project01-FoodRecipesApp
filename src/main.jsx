@@ -4,6 +4,7 @@ import App from './App.jsx'
 import AuthProvider from './contexts/authContext.jsx'
 import ModalProvider from './contexts/modalContext.jsx'
 import { CategoriesProvider } from './contexts/categoriesContext.jsx'
+import { RecipesProvider } from './contexts/recipesContext.jsx'
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthProvider>
       <ModalProvider>
         <CategoriesProvider>
-          <App />
+          <RecipesProvider>
+            <App />
+          </RecipesProvider>
         </CategoriesProvider>
       </ModalProvider>
     </AuthProvider>
