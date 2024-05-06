@@ -38,7 +38,7 @@ function categoriesReducer(state = initialState, action) {
       return {
         ...state,
         categories: [action.payload, ...state.categories],
-        loading: false, // Set loading to false after successful addition
+        loading: false, 
       }
     case 'ADD_CATEGORY_FAILURE':
       return { ...state, loading: false }
@@ -50,7 +50,7 @@ function categoriesReducer(state = initialState, action) {
         categories: state.categories.map((category) =>
           category.id === action.payload.id ? action.payload : category
         ),
-        loading: false, // Set loading to false after successful update
+        loading: false, 
       }
     case 'UPDATE_CATEGORY_FAILURE':
       return { ...state, loading: false }
@@ -62,7 +62,7 @@ function categoriesReducer(state = initialState, action) {
         categories: state.categories.filter(
           (category) => category.id !== action.payload
         ),
-        loading: false, // Set loading to false after successful deletion
+        loading: false, 
       }
     case 'DELETE_CATEGORY_FAILURE':
       return { ...state, loading: false }

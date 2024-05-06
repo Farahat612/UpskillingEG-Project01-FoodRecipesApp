@@ -43,15 +43,10 @@ const useRecipes = () => {
     dispatch({ type: 'SET_TAG_FILTER', payload: tagId })
   }
 
-  const addRecipe = async (newRecipe) => {
+  const addRecipe = async (newRecipeFormData) => {
     try {
       dispatch({ type: 'ADD_RECIPE' })
-      const formData = new FormData()
-      formData.append('name', newRecipe.name)
-      formData.append('description', newRecipe.description)
-      formData.append('image', newRecipe.image)
-      // Add other fields as needed
-      const response = await apiProtected.post('/Recipe', formData)
+      const response = await apiProtected.post('/Recipe', newRecipeFormData)
       dispatch({ type: 'ADD_RECIPE_SUCCESS', payload: response.data })
       notify('success', 'Recipe added successfully')
     } catch (error) {
