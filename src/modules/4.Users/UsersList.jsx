@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { UsersContext } from '../../contexts/usersContext'
+import { useModal } from '../../contexts/modalContext'
 import { useUsers } from '../../hooks/users'
 import { staticURL } from '../../utils/api'
 
@@ -9,6 +10,7 @@ import Svg from '../../assets/header/others.svg'
 import nodataImg from '../../assets/images/no-data.png'
 import { Banner, Header, LoadingScreen, NoData } from '../../components/shared'
 import { MasterLayout } from '../../layouts'
+import DeleteUser from './components/DeleteUser'
 
 const UsersList = () => {
   // useContext
@@ -52,6 +54,9 @@ const UsersList = () => {
   }
   let totalPages = Math.ceil(state.totalNumberOfRecords / state.pageSize)
   let currentPage = state.pageNumber
+
+  // delete user modal
+  const { openDeleteUserModal, setActionUser } = useModal()
 
   return (
     <MasterLayout>
@@ -161,10 +166,10 @@ const UsersList = () => {
                       <p
                         className='dropdown-item cursor-pointer text-danger d-flex gap-3 align-items-center m-0'
                         id='delete-user'
-                        // onClick={() => {
-                        //   setActionuser(user)
-                        //   openDeleteModal()
-                        // }}
+                        onClick={() => {
+                          setActionUser(user)
+                          openDeleteUserModal()
+                        }}
                       >
                         <FaTrashAlt className='pe-none' />
                         <span className='text-dark pe-none'>Delete</span>
@@ -217,6 +222,9 @@ const UsersList = () => {
           />
         </Pagination>
       )}
+
+      {/* Delete User Modal */}
+      <DeleteUser />
     </MasterLayout>
   )
 }

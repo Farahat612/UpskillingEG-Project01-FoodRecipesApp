@@ -43,6 +43,19 @@ const ModalProvider = ({ children }) => {
     setIsDeleteModalOpen(false)
   }
 
+
+  // Delete User Modal
+  const [isDeleteUserModalOpen, setIsDeleteUserModalOpen] = useState(false)
+  const [actionUser, setActionUser] = useState(null)
+  // Function to open the modal
+  const openDeleteUserModal = () => {
+    setIsDeleteUserModalOpen(true)
+  }
+  // Function to close the modal
+  const closeDeleteUserModal = () => {
+    setIsDeleteUserModalOpen(false)
+  }
+
   // Provide the modal state and functions to the children components
   return (
     <ModalContext.Provider
@@ -62,6 +75,11 @@ const ModalProvider = ({ children }) => {
         closeDeleteModal,
         actionRecipe,
         setActionRecipe,
+        isDeleteUserModalOpen,
+        openDeleteUserModal,
+        closeDeleteUserModal,
+        actionUser,
+        setActionUser,
       }}
     >
       {children}

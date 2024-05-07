@@ -27,7 +27,7 @@ const useVerify = () => {
     // API call
     try {
       setBtnLoading(true)
-      const response = await apiPublic.post('/Users/verify', data)
+      const response = await apiPublic.put('Users/verify', data)
 
       // * Success:
       // Show success message
