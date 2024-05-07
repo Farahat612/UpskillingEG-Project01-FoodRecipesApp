@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 // context
 import { useAuth } from '../../contexts/authContext'
+import { useModal } from '../../contexts/modalContext.jsx'
 // axios
 import { apiPublic } from '../../utils/api.js'
 // toast
@@ -13,6 +14,7 @@ import { notify } from '../../utils/notify'
 
 const useChange = () => {
   // context
+  const { closeModal } = useModal()
   const { logout } = useAuth()
   // navigate initialization
   const navigate = useNavigate()
@@ -37,16 +39,15 @@ const useChange = () => {
     try {
       // * Start Loading
       setBtnLoading(true)
-      const response = await apiPublic.post('/Users/ChangePassword', data, {
+      const response = await apiPublic.put('/Users/ChangePassword', data, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       console.log(response.data)
       // * Success:
       // Show success message
       notify('success', 'Password has been changed successfully, please login.')
-      // Close Modal
-      // closeModal()
-      // logout
+      // close the modal
+      closeModal()
       logout()
       // navigate to login
       navigate('/login')
