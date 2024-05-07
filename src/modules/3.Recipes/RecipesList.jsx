@@ -204,7 +204,7 @@ const RecipesList = () => {
                         >
                           <li>
                             <p
-                              className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center'
+                              className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center my-1'
                               id='view-recipe'
                               onClick={() =>
                                 navigate(`/recipeItem/${recipe.id}`)
@@ -218,7 +218,7 @@ const RecipesList = () => {
                             <>
                               <li>
                                 <p
-                                  className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center'
+                                  className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center my-1'
                                   id='edit-recipe'
                                   onClick={() =>
                                     navigate(`/editRecipe/${recipe.id}`)

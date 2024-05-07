@@ -122,19 +122,15 @@ const SideBar = () => {
             Categories
           </MenuItem>
 
-          {/* Recipes For Admin */}
-          <MenuItem
-            style={AdminMenuItemVisibilityStyle}
-            icon={<HiTemplate />}
-            component={<NavLink to='/recipes' />}
-          >
+          {/* Recipes */}
+          <MenuItem icon={<HiTemplate />} component={<NavLink to='/recipes' />}>
             {' '}
             Recipes
           </MenuItem>
 
           {/* Favourites */}
           <MenuItem
-            style={AdminMenuItemVisibilityStyle}
+            style={UserMenuItemVisibilityStyle}
             icon={<FaRegHeart />}
             component={<NavLink to='/userFavourites' />}
           >

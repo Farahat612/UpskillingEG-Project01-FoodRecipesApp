@@ -1,7 +1,9 @@
 // react hooks
+import { useEffect } from 'react'
 // react-router-dom
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 // contexts
+import { useAuth } from './contexts/authContext'
 // react-toastify
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -31,6 +33,12 @@ import { UserFavourites } from './modules/6.UserPortal'
 import './App.css'
 
 function App() {
+  const { saveUser } = useAuth()
+
+  useEffect(() => {
+    saveUser()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <>
       <ToastContainer />

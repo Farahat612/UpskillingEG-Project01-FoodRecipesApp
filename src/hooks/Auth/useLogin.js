@@ -37,7 +37,7 @@ const useLogin = () => {
       setBtnLoading(true)
       // API call
       const response = await apiPublic.post('/Users/Login', data)
-      console.log(response.data)
+      // console.log(response.data)
       // * Success:
       // Save token in local storage
       localStorage.setItem('token', response.data.token)
@@ -50,7 +50,7 @@ const useLogin = () => {
     } catch (error) {
       // console.log(error.message)
       // Show error message
-      notify('error', error.response.data.message)
+      notify('error', error.response)
     } finally {
       // * End Loading
       setBtnLoading(false)
