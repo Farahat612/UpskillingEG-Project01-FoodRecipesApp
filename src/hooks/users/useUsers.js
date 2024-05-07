@@ -22,10 +22,10 @@ const useUsers = () => {
         params: {
           pageNumber,
           pageSize,
-          userNameFilter,
-          emailFilter,
-          countryFilter,
-          groupsFilter,
+          userName: userNameFilter,
+          email: emailFilter,
+          country: countryFilter,
+          groups: groupsFilter,
         },
       })
       dispatch({ type: 'GET_USERS_SUCCESS', payload: response.data })

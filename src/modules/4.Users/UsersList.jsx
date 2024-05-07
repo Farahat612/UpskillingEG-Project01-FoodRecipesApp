@@ -1,17 +1,14 @@
 import { useContext, useEffect } from 'react'
 import { UsersContext } from '../../contexts/usersContext'
 import { useUsers } from '../../hooks/users'
-import { useModal } from '../../contexts/modalContext'
 import { staticURL } from '../../utils/api'
 
-import { MasterLayout } from '../../layouts'
-import { Header, Banner, LoadingScreen, NoData } from '../../components/shared'
+import { Pagination, Table } from 'react-bootstrap'
+import { FaTrashAlt } from 'react-icons/fa'
 import Svg from '../../assets/header/others.svg'
 import nodataImg from '../../assets/images/no-data.png'
-import { Table, Pagination } from 'react-bootstrap'
-import { FaEdit, FaTrashAlt, FaEye } from 'react-icons/fa'
-import { IoEllipsisHorizontal } from 'react-icons/io5'
-
+import { Banner, Header, LoadingScreen, NoData } from '../../components/shared'
+import { MasterLayout } from '../../layouts'
 
 const UsersList = () => {
   // useContext
@@ -30,19 +27,19 @@ const UsersList = () => {
     getUsers(
       state.pageNumber,
       state.pageSize,
-      state.userNameFilter,
-      state.emailFilter,
-      state.countryFilter,
-      state.groupsFilter
+      state.userName,
+      state.email,
+      state.country,
+      state.groups
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     state.pageNumber,
     state.pageSize,
-    state.userNameFilter,
-    state.emailFilter,
-    state.countryFilter,
-    state.groupsFilter,
+    state.userName,
+    state.email,
+    state.country,
+    state.groups,
   ])
 
   // pagination
@@ -70,6 +67,44 @@ const UsersList = () => {
           <h4>User Table Details</h4>
           <p>you can check all users details here!</p>
         </Banner>
+      </div>
+
+      {/* Filtration */}
+      <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
+        {/* Username Filter */}
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Search by Username'
+          value={state.userName}
+          onChange={(e) => setUserNameFilter(e.target.value)}
+        />
+        {/* Email Filter */}
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Search by Email'
+          value={state.email}
+          onChange={(e) => setEmailFilter(e.target.value)}
+        />
+        {/* Country Filter */}
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Search by Country'
+          value={state.country}
+          onChange={(e) => setCountryFilter(e.target.value)}
+        />
+        {/* Groups Filter */}
+        <select
+          className='form-select'
+          value={state.groups}
+          onChange={(e) => setGroupsFilter(e.target.value)}
+        >
+          <option value=''>User Groups</option>
+          <option value='1'>SuperAdmin</option>
+          <option value='2'>SystemUser</option>
+        </select>
       </div>
 
       {/* Users Table */}
@@ -112,7 +147,7 @@ const UsersList = () => {
                         style={{
                           width: '70px',
                           height: '40px',
-                          objectFit: 'cover',
+                          objectFit: 'contain',
                         }}
                       />
                     </td>
@@ -150,6 +185,38 @@ const UsersList = () => {
           </Table>
         )}
       </div>
+
+      {/* Pagination */}
+      {!state.loading && state.totalNumberOfRecords >= 10 && (
+        <Pagination className='d-flex justify-content-start '>
+          <Pagination.First
+            onClick={() => setPagination(1, state.pageSize)}
+            disabled={currentPage === 1}
+          />
+          <Pagination.Prev
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          />
+          {totalPages > 0 &&
+            Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Pagination.Item
+                key={page}
+                active={page === currentPage}
+                onClick={() => setPagination(page, state.pageSize)}
+              >
+                {page}
+              </Pagination.Item>
+            ))}
+          <Pagination.Next
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          />
+          <Pagination.Last
+            onClick={() => setPagination(totalPages, state.pageSize)}
+            disabled={currentPage === totalPages}
+          />
+        </Pagination>
+      )}
     </MasterLayout>
   )
 }

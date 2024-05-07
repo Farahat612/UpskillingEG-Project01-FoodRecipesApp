@@ -90,46 +90,44 @@ const RecipesList = () => {
       </div>
 
       {/* Filteration */}
-      {!state.loading && (
-        <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
-          {/* 01 Filteration By name */}
-          <input
-            type='text'
-            className='form-control'
-            placeholder='Search by name'
-            value={state.filter}
-            onChange={(e) => setFilter(e.target.value)}
-          />
+      <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
+        {/* 01 Filteration By name */}
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Search by name'
+          value={state.filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
 
-          {/* 02 Filteration By Category */}
-          <select
-            className='form-select'
-            value={state.selectedCategoryId ? state.selectedCategoryId : ''}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-          >
-            <option value=''>All Categories</option>
-            {categoriesState.categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+        {/* 02 Filteration By Category */}
+        <select
+          className='form-select'
+          value={state.selectedCategoryId ? state.selectedCategoryId : ''}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+        >
+          <option value=''>All Categories</option>
+          {categoriesState.categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
 
-          {/* 03 Filteration By Tag */}
-          <select
-            className='form-select'
-            value={state.selectedTagId ? state.selectedTagId : ''}
-            onChange={(e) => setTagFilter(e.target.value)}
-          >
-            <option value=''>All Tags</option>
-            {tagsState.tags.map((tag) => (
-              <option key={tag.id} value={tag.id}>
-                {tag.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
+        {/* 03 Filteration By Tag */}
+        <select
+          className='form-select'
+          value={state.selectedTagId ? state.selectedTagId : ''}
+          onChange={(e) => setTagFilter(e.target.value)}
+        >
+          <option value=''>All Tags</option>
+          {tagsState.tags.map((tag) => (
+            <option key={tag.id} value={tag.id}>
+              {tag.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {/* Recipes Table */}
       <div className='recipes-table'>

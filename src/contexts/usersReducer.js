@@ -29,13 +29,13 @@ function usersReducer(state = initialState, action) {
     case 'GET_USERS_FAILURE':
       return { ...state, loading: false }
     case 'SET_USERNAME_FILTER':
-      return { ...state, userNameFilter: action.payload }
+      return { ...state, userName: action.payload }
     case 'SET_EMAIL_FILTER':
-      return { ...state, emailFilter: action.payload }
+      return { ...state, email: action.payload }
     case 'SET_COUNTRY_FILTER':
-      return { ...state, countryFilter: action.payload }
+      return { ...state, country: action.payload }
     case 'SET_GROUPS_FILTER':
-      return { ...state, groupsFilter: action.payload }
+      return { ...state, groups: action.payload }
     case 'SET_PAGINATION':
       return {
         ...state,
