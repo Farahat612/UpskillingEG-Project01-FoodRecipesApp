@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { RecipesContext } from '../../contexts/recipesContext'
 import { CategoriesContext } from '../../contexts/categoriesContext'
 import { TagsContext } from '../../contexts/tagsContext'
+import { useAuth } from '../../contexts/authContext'
 import { useModal } from '../../contexts/modalContext'
 import { useRecipes } from '../../hooks/recipes'
 import { useCategories } from '../../hooks/categories'
@@ -15,10 +16,11 @@ import { DeleteRecipeItem } from './'
 import Svg from '../../assets/header/others.svg'
 import nodataImg from '../../assets/images/no-data.png'
 import { Table, Pagination } from 'react-bootstrap'
-import { FaEdit, FaTrashAlt, FaEye } from 'react-icons/fa'
+import { FaEdit, FaTrashAlt, FaEye, FaRegHeart, FaHeart } from 'react-icons/fa'
 import { IoEllipsisHorizontal } from 'react-icons/io5'
 
 const RecipesList = () => {
+  const { userType } = useAuth()
   // navigate
   const navigate = useNavigate()
   // categories for filteration
@@ -76,18 +78,20 @@ const RecipesList = () => {
   return (
     <MasterLayout>
       {/* Header and Banner */}
-      <div className='d-flex flex-column gap-3'>
-        <Header
-          title='Recipes Items'
-          description='You can now add your items that any user can order it from the Application and you can edit'
-          imgUrl={Svg}
-        />
+      {userType === 'SuperAdmin' && (
+        <div className='d-flex flex-column gap-3'>
+          <Header
+            title='Recipes Items'
+            description='You can now add your items that any user can order it from the Application and you can edit'
+            imgUrl={Svg}
+          />
 
-        <Banner buttonTitle='Add Recipe' buttonDestination='/addRecipe'>
-          <h4>Recipes Table Details</h4>
-          <p>you can check all recipes details here!</p>
-        </Banner>
-      </div>
+          <Banner buttonTitle='Add Recipe' buttonDestination='/addRecipe'>
+            <h4>Recipes Table Details</h4>
+            <p>you can check all recipes details here!</p>
+          </Banner>
+        </div>
+      )}
 
       {/* Filteration */}
       <div className='filteration d-flex justify-content-between align-items-center gap-3 my-3'>
@@ -209,30 +213,52 @@ const RecipesList = () => {
                               <FaEye className='pe-none' />
                               <span className='text-dark pe-none'>View</span>
                             </p>
-                            <p
-                              className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center'
-                              id='edit-recipe'
-                              onClick={() =>
-                                navigate(`/editRecipe/${recipe.id}`)
-                              }
-                            >
-                              <FaEdit className='pe-none' />
-                              <span className='text-dark pe-none'>Edit</span>
-                            </p>
                           </li>
-                          <li>
-                            <p
-                              className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center m-0'
-                              id='delete-recipe'
-                              onClick={() => {
-                                setActionRecipe(recipe)
-                                openDeleteModal()
-                              }}
-                            >
-                              <FaTrashAlt className='pe-none' />
-                              <span className='text-dark pe-none'>Delete</span>
-                            </p>
-                          </li>
+                          {userType === 'SuperAdmin' ? (
+                            <>
+                              <li>
+                                <p
+                                  className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center'
+                                  id='edit-recipe'
+                                  onClick={() =>
+                                    navigate(`/editRecipe/${recipe.id}`)
+                                  }
+                                >
+                                  <FaEdit className='pe-none' />
+                                  <span className='text-dark pe-none'>
+                                    Edit
+                                  </span>
+                                </p>
+                              </li>
+                              <li>
+                                <p
+                                  className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center m-0'
+                                  id='delete-recipe'
+                                  onClick={() => {
+                                    setActionRecipe(recipe)
+                                    openDeleteModal()
+                                  }}
+                                >
+                                  <FaTrashAlt className='pe-none' />
+                                  <span className='text-dark pe-none'>
+                                    Delete
+                                  </span>
+                                </p>
+                              </li>
+                            </>
+                          ) : (
+                            <li>
+                              <p
+                                className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center m-0'
+                                id='delete-recipe'
+                              >
+                                <FaHeart className='pe-none' />
+                                <span className='text-dark pe-none'>
+                                  Add to Favourite
+                                </span>
+                              </p>
+                            </li>
+                          )}
                         </ul>
                       </div>
                     </td>
