@@ -18,7 +18,7 @@ const useUsers = () => {
   ) => {
     try {
       dispatch({ type: 'GET_USERS' })
-      const response = await apiProtected.get('/User', {
+      const response = await apiProtected.get('/Users', {
         params: {
           pageNumber,
           pageSize,
@@ -58,7 +58,7 @@ const useUsers = () => {
   const deleteUser = async (id) => {
     try {
       dispatch({ type: 'DELETE_USER' })
-      await apiProtected.delete(`/User/${id}`)
+      await apiProtected.delete(`/Users/${id}`)
       notify('success', 'User deleted successfully')
       dispatch({ type: 'DELETE_USER_SUCCESS', payload: id })
     } catch (error) {
