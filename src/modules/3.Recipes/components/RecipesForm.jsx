@@ -1,10 +1,34 @@
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types'
+import { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { Form, InputGroup } from 'react-bootstrap'
-import { useState } from 'react'
-import { FaImage } from 'react-icons/fa'
+import { CategoriesContext } from '../../../contexts/categoriesContext'
+import { TagsContext } from '../../../contexts/tagsContext'
+import { useCategories } from '../../../hooks/categories'
+// import { useNavigate } from 'react-router-dom'
+import { staticURL } from '../../../utils/api'
 
-const RecipesForm = ({ type }) => {
+import { Form, InputGroup } from 'react-bootstrap'
+import { FaImage } from 'react-icons/fa'
+import nodataImg from '../../../assets/images/no-data.png'
+
+const RecipesForm = ({ recipe }) => {
+  // categories for list
+  const { state: categoriesState } = useContext(CategoriesContext)
+  let categoriesTotal =
+    categoriesState.totalNumberOfRecords != 0
+      ? categoriesState.totalNumberOfRecords
+      : 15
+  const { getCategories } = useCategories()
+  // tags for list
+  const { state: tagsState } = useContext(TagsContext)
+  // get categories
+  useEffect(() => {
+    getCategories(1, categoriesTotal)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  
+
   // react hook form
   const {
     register,
@@ -42,10 +66,11 @@ const RecipesForm = ({ type }) => {
         <Form.Group className='mb-3'>
           <Form.Control
             type='text'
-            placeholder='Recipe Name'
+            placeholder='Name'
             {...register('name', {
               required: 'Recipe Name is required',
             })}
+            defaultValue={recipe ? recipe.name : ''}
           />
           {errors.name && (
             <div className='alert alert-danger py-1 my-2'>
@@ -55,22 +80,23 @@ const RecipesForm = ({ type }) => {
         </Form.Group>
 
         <Form.Group className='mb-3'>
-          {/* <Form.Select
+          <Form.Select
             aria-label='Select Recipe Tag'
             {...register('tagId', {
               required: 'Recipe Tag is required',
             })}
+            value={recipe ? recipe.tag?.id : ''}
           >
             <option value='' className='text-muted'>
               {' '}
               Select Tag
             </option>
-            {tags.map((tag) => (
+            {tagsState.tags.map((tag) => (
               <option key={tag.id} value={tag.id}>
                 {tag.name}
               </option>
             ))}
-          </Form.Select> */}
+          </Form.Select>
           {errors.tagId && (
             <div className='alert alert-danger py-1 my-2'>
               {errors.tagId.message}
@@ -81,10 +107,11 @@ const RecipesForm = ({ type }) => {
         <Form.Group className='mb-3'>
           <Form.Control
             type='number'
-            placeholder='Recipe Price'
+            placeholder='Price'
             {...register('price', {
               required: 'Price is required',
             })}
+            defaultValue={recipe ? recipe.price : ''}
           />
           {errors.price && (
             <div className='alert alert-danger py-1 my-2'>
@@ -94,22 +121,23 @@ const RecipesForm = ({ type }) => {
         </Form.Group>
 
         <Form.Group className='mb-3'>
-          {/* <Form.Select
+          <Form.Select
             aria-label='Select Recipe Category'
             {...register('categoriesIds', {
               required: 'Category is required',
             })}
+            value={recipe && recipe.category ? recipe.category[0]?.id : ''}
           >
             <option value='' className='text-muted'>
               {' '}
               Select Category
             </option>
-            {categories.map((category) => (
+            {categoriesState.categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}
-          </Form.Select> */}
+          </Form.Select>
           {errors.categoriesIds && (
             <div className='alert alert-danger py-1 my-2'>
               {errors.categoriesIds.message}
@@ -120,10 +148,11 @@ const RecipesForm = ({ type }) => {
         <Form.Group className='mb-3'>
           <Form.Control
             as='textarea'
-            placeholder='Recipe Description ...'
+            placeholder='Description ...'
             {...register('description', {
               required: 'Recipe Description is required',
             })}
+            defaultValue={recipe ? recipe.description : ''}
           />
           {errors.description && (
             <div className='alert alert-danger py-1 my-2'>
@@ -139,30 +168,33 @@ const RecipesForm = ({ type }) => {
             </InputGroup.Text>
             <Form.Control
               type='file'
-              {...register('recipeImage', {
-                required: 'Recipe Image is required',
-              })}
+              {...register('recipeImage')}
               onChange={handleImageChange}
             />
-            {previewImage && (
-              <img
-                src={previewImage}
-                alt='recipe'
-                className='img-fluid rounded-2'
-                style={{
-                  objectFit: 'cover',
-                  height: '38px',
-                  width: '60px',
-                }}
-              />
-            )}
+
+            <img
+              src={
+                previewImage
+                  ? previewImage
+                  : recipe?.imagePath
+                  ? `${staticURL}/${recipe.imagePath}`
+                  : nodataImg
+              }
+              alt='recipe'
+              className='img-fluid rounded-2 d-inline-block ms-2'
+              style={{
+                objectFit: 'contain',
+                height: '38px',
+                width: '60px',
+              }}
+            />
           </InputGroup>
         </div>
 
         <Form.Group className='mb-3'>
           <Form.Control
             type='submit'
-            value={type === 'add' ? 'Add Recipe' : 'Edit Recipe'}
+            value={recipe ? 'Edit Recipe' : 'Add Recipe'}
             className='btn btn-success w-100'
           />
         </Form.Group>
@@ -175,5 +207,5 @@ export default RecipesForm
 
 // propTypes
 RecipesForm.propTypes = {
-  type: PropTypes.string.isRequired,
+  recipe: PropTypes.object,
 }

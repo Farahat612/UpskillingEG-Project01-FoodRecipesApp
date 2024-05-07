@@ -17,7 +17,7 @@ const AddRecipeItem = () => {
           here and sill it with the table !
         </p>
       </Banner>
-      <RecipesForm type='add' />
+      <RecipesForm />
     </MasterLayout>
   )
 }
