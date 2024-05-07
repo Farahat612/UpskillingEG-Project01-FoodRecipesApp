@@ -179,7 +179,11 @@ const RecipesList = () => {
                     <td className='text-truncate' style={{ maxWidth: '150px' }}>
                       {recipe.description}
                     </td>
-                    <td>{recipe.category[0]?.name}</td>
+                    <td>
+                      {recipe && recipe.category
+                        ? recipe.category[0]?.name
+                        : ''}
+                    </td>
                     <td>{recipe.tag?.name}</td>
                     <td>
                       <div className='dropdown d-flex justify-content-center'>

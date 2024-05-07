@@ -47,23 +47,23 @@ const useRecipes = () => {
     try {
       dispatch({ type: 'ADD_RECIPE' })
       const response = await apiProtected.post('/Recipe', newRecipeFormData)
-      dispatch({ type: 'ADD_RECIPE_SUCCESS', payload: response.data })
       notify('success', 'Recipe added successfully')
+      dispatch({ type: 'ADD_RECIPE_SUCCESS', payload: response.data })
     } catch (error) {
       dispatch({ type: 'ADD_RECIPE_FAILURE' })
       notify('error', `Error adding recipe - ${error.response.data.message}`)
     }
   }
 
-  const updateRecipe = async (updatedRecipe) => {
+  const updateRecipe = async (updatedRecipe, id) => {
     try {
       dispatch({ type: 'UPDATE_RECIPE' })
       const response = await apiProtected.put(
-        `/Recipe/${updatedRecipe.id}`,
+        `/Recipe/${id}`,
         updatedRecipe
       )
-      dispatch({ type: 'UPDATE_RECIPE_SUCCESS', payload: response.data })
       notify('success', 'Recipe updated successfully')
+      dispatch({ type: 'UPDATE_RECIPE_SUCCESS', payload: response.data })
     } catch (error) {
       dispatch({ type: 'UPDATE_RECIPE_FAILURE' })
       notify('error', `Error updating recipe - ${error.response.data.message}`)

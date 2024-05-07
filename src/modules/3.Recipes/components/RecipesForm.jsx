@@ -4,15 +4,19 @@ import { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { CategoriesContext } from '../../../contexts/categoriesContext'
 import { TagsContext } from '../../../contexts/tagsContext'
+import { RecipesContext } from '../../../contexts/recipesContext'
 import { useCategories } from '../../../hooks/categories'
-// import { useNavigate } from 'react-router-dom'
+import { useRecipes } from '../../../hooks/recipes'
+import { useNavigate } from 'react-router-dom'
 import { staticURL } from '../../../utils/api'
 
+import { LoadingScreen } from '../../../components/shared'
 import { Form, InputGroup } from 'react-bootstrap'
 import { FaImage } from 'react-icons/fa'
 import nodataImg from '../../../assets/images/no-data.png'
 
 const RecipesForm = ({ recipe }) => {
+  const navigate = useNavigate()
   // categories for list
   const { state: categoriesState } = useContext(CategoriesContext)
   let categoriesTotal =
@@ -27,8 +31,9 @@ const RecipesForm = ({ recipe }) => {
     getCategories(1, categoriesTotal)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  
 
+  // userecipies hook
+  const { addRecipe, updateRecipe } = useRecipes()
   // react hook form
   const {
     register,
@@ -45,11 +50,14 @@ const RecipesForm = ({ recipe }) => {
     }
     return formData
   }
+  // loading state from recipes context
+  const { state } = useContext(RecipesContext)
 
   // submit function
   const onSubmit = (data) => {
     const formData = appendFormData(data)
-    console.log(formData)
+    recipe ? updateRecipe(formData, recipe.id) : addRecipe(formData)
+    state.loading != true && navigate('/recipes')
   }
 
   // preview image
@@ -58,6 +66,10 @@ const RecipesForm = ({ recipe }) => {
     if (e.target.files[0]) {
       setPreviewImage(URL.createObjectURL(e.target.files[0]))
     }
+  }
+
+  if (state.loading) {
+    return <LoadingScreen />
   }
 
   return (
@@ -85,7 +97,7 @@ const RecipesForm = ({ recipe }) => {
             {...register('tagId', {
               required: 'Recipe Tag is required',
             })}
-            value={recipe ? recipe.tag?.id : ''}
+            defaultValue={recipe ? recipe.tag?.id : ''}
           >
             <option value='' className='text-muted'>
               {' '}
@@ -126,7 +138,9 @@ const RecipesForm = ({ recipe }) => {
             {...register('categoriesIds', {
               required: 'Category is required',
             })}
-            value={recipe && recipe.category ? recipe.category[0]?.id : ''}
+            defaultValue={
+              recipe && recipe.category ? recipe.category[0]?.id : ''
+            }
           >
             <option value='' className='text-muted'>
               {' '}
