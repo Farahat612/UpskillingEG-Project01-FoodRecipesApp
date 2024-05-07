@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useModal } from '../../contexts/modalContext'
 import { useCategories } from '../../hooks/categories'
@@ -18,7 +19,16 @@ const CategoryFormModal = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm()
+
+  useEffect(() => {
+    if (type === 'edit') {
+      setValue('name', actionCategory.name)
+    } else {
+      setValue('name', '')
+    }
+  }, [type, actionCategory, setValue])
 
   const onSubmit = (data) => {
     if (type === 'add') {
@@ -66,7 +76,6 @@ const CategoryFormModal = () => {
                 placeholder='Ex: Pasta'
                 autoFocus
                 {...register('name', { required: 'Name is required' })}
-                defaultValue={type == 'edit' ? actionCategory.name : ''}
               />
               {errors.name && (
                 <div className='alert alert-danger mt-2 py-1 '>

@@ -39,7 +39,23 @@ const RecipesForm = ({ recipe }) => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm()
+  // setting form fields with recipe data if recipe is passed
+  useEffect(() => {
+    if (recipe) {
+      setValue('name', recipe.name)
+      setValue('tagId', recipe.tag?.id)
+      setValue('price', recipe.price)
+      setValue(
+        'categoriesIds',
+        recipe && recipe.category ? recipe.category[0]?.id : ''
+      )
+      setValue('description', recipe.description)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recipe])
+
   // creating formData
   const appendFormData = (data) => {
     const formData = new FormData()
@@ -82,7 +98,6 @@ const RecipesForm = ({ recipe }) => {
             {...register('name', {
               required: 'Recipe Name is required',
             })}
-            defaultValue={recipe ? recipe.name : ''}
           />
           {errors.name && (
             <div className='alert alert-danger py-1 my-2'>
@@ -97,7 +112,6 @@ const RecipesForm = ({ recipe }) => {
             {...register('tagId', {
               required: 'Recipe Tag is required',
             })}
-            defaultValue={recipe ? recipe.tag?.id : ''}
           >
             <option value='' className='text-muted'>
               {' '}
@@ -123,7 +137,6 @@ const RecipesForm = ({ recipe }) => {
             {...register('price', {
               required: 'Price is required',
             })}
-            defaultValue={recipe ? recipe.price : ''}
           />
           {errors.price && (
             <div className='alert alert-danger py-1 my-2'>
@@ -138,9 +151,6 @@ const RecipesForm = ({ recipe }) => {
             {...register('categoriesIds', {
               required: 'Category is required',
             })}
-            defaultValue={
-              recipe && recipe.category ? recipe.category[0]?.id : ''
-            }
           >
             <option value='' className='text-muted'>
               {' '}
@@ -166,7 +176,6 @@ const RecipesForm = ({ recipe }) => {
             {...register('description', {
               required: 'Recipe Description is required',
             })}
-            defaultValue={recipe ? recipe.description : ''}
           />
           {errors.description && (
             <div className='alert alert-danger py-1 my-2'>
@@ -185,7 +194,6 @@ const RecipesForm = ({ recipe }) => {
               {...register('recipeImage')}
               onChange={handleImageChange}
             />
-
             <img
               src={
                 previewImage
