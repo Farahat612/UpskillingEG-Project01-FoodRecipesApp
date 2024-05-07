@@ -1,13 +1,16 @@
+import { useAuth } from '../../contexts/authContext'
+
 import { MasterLayout } from '../../layouts'
 import { Header, Banner } from '../../components/shared'
 import HomeSvg from '../../assets/header/home.svg'
 
 const Dashboard = () => {
+  const { user } = useAuth()
   return (
     <MasterLayout>
       <div className='d-flex flex-column gap-3'>
         <Header
-          title='Welcome Upskilling!'
+          title={`Welcome ${user?.userName}!`}
           description='
           This is a welcoming screen for the entry of the application , you can now see the options
         '

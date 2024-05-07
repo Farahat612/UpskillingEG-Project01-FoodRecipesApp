@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 // react
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 // react-router-dom
 import { NavLink } from 'react-router-dom'
 // contexts
@@ -13,11 +14,12 @@ import { Sidebar, Menu, MenuItem, sidebarClasses } from 'react-pro-sidebar'
 import {
   FaHome,
   FaUser,
-  FaUtensils,
   FaList,
   FaLock,
   FaSignOutAlt,
+  FaRegHeart,
 } from 'react-icons/fa'
+import { HiTemplate } from 'react-icons/hi'
 // components
 import { GlobalModal } from './'
 import { ChangePass } from '../../modules/1.Authentication'
@@ -33,7 +35,7 @@ const SideBar = () => {
   }
 
   // logout functionality
-  const { logout } = useAuth()
+  const { logout, userType } = useAuth()
   const handleLogoutClick = () => {
     logout()
     toast.warn('Logged out successfully', { autoClose: 1500 })
@@ -41,6 +43,15 @@ const SideBar = () => {
 
   // modal context
   const { openModal } = useModal()
+
+  // Meny Items display based on user type
+  const AdminMenuItemVisibilityStyle = {
+    display: userType === 'SuperAdmin' ? 'flex' : 'none',
+  }
+  const UserMenuItemVisibilityStyle = {
+    display: userType === 'SystemUser' ? 'flex' : 'none',
+  }
+
   return (
     <div className='sidebar-container'>
       <Sidebar
@@ -92,21 +103,43 @@ const SideBar = () => {
           </MenuItem>
 
           {/* Users */}
-          <MenuItem icon={<FaUser />} component={<NavLink to='/users' />}>
+          <MenuItem
+            style={AdminMenuItemVisibilityStyle}
+            icon={<FaUser />}
+            component={<NavLink to='/users' />}
+          >
             {' '}
             Users
           </MenuItem>
 
           {/* Categories */}
-          <MenuItem icon={<FaList />} component={<NavLink to='/categories' />}>
+          <MenuItem
+            style={AdminMenuItemVisibilityStyle}
+            icon={<FaList />}
+            component={<NavLink to='/categories' />}
+          >
             {' '}
             Categories
           </MenuItem>
 
-          {/* Recipes */}
-          <MenuItem icon={<FaUtensils />} component={<NavLink to='/recipes' />}>
+          {/* Recipes For Admin */}
+          <MenuItem
+            style={AdminMenuItemVisibilityStyle}
+            icon={<HiTemplate />}
+            component={<NavLink to='/recipes' />}
+          >
             {' '}
             Recipes
+          </MenuItem>
+
+          {/* Favourites */}
+          <MenuItem
+            style={AdminMenuItemVisibilityStyle}
+            icon={<FaRegHeart />}
+            component={<NavLink to='/userFavourites' />}
+          >
+            {' '}
+            Favourites
           </MenuItem>
 
           {/* Change Password */}
