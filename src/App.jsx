@@ -8,7 +8,7 @@ import { useAuth } from './contexts/authContext'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // components
-import { NotFound, RouteGuard } from './components/shared'
+import { NotFound, RouteGuard } from './modules/shared'
 // Auth
 import {
   ForgotPass,

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useModal } from '../../contexts/modalContext'
 import { useCategories } from '../../hooks/categories'
 
-import { DeleteData } from '../../components/shared'
+import { DeleteData } from '../../modules/shared'
 import { Form, Button, Modal } from 'react-bootstrap'
 import { IoClose } from 'react-icons/io5'
 

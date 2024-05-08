@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { AuthLayout } from '../../layouts'
 import AuthForm from './components/AuthForm'
-import { LoadingSpinner } from '../../components/shared'
+import { LoadingSpinner } from '../shared'
 import {
   FaEnvelope,
   FaEye,

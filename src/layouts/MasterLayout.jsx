@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { SideBar, Navbar } from '../components/shared'
+import { SideBar, Navbar } from '../modules/shared'
 const MasterLayout = ({ children }) => {
   return (
     <div className=' p-0'>

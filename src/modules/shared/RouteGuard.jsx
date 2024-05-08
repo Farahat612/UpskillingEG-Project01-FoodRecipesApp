@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from '../../contexts/authContext'
 import PropTypes from 'prop-types'
 
-import { LoadingScreen } from './'
+import { LoadingScreen } from '.'
 
 const RouteGuard = ({ mode }) => {
   const { isLoading } = useAuth()

@@ -13,7 +13,7 @@ import { useFavorites } from '../../hooks/favorites'
 import { staticURL } from '../../utils/api'
 
 import { MasterLayout } from '../../layouts'
-import { Header, Banner, LoadingScreen, NoData } from '../../components/shared'
+import { Header, Banner, LoadingScreen, NoData } from '../../modules/shared'
 import { DeleteRecipeItem } from './'
 import Svg from '../../assets/header/others.svg'
 import nodataImg from '../../assets/images/no-data.png'

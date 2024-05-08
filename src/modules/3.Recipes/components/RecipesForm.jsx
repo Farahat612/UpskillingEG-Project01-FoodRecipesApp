@@ -10,7 +10,7 @@ import { useRecipes } from '../../../hooks/recipes'
 import { useNavigate } from 'react-router-dom'
 import { staticURL } from '../../../utils/api'
 
-import { LoadingScreen } from '../../../components/shared'
+import { LoadingScreen } from '../../../modules/shared'
 import { Form, InputGroup } from 'react-bootstrap'
 import { FaImage } from 'react-icons/fa'
 import nodataImg from '../../../assets/images/no-data.png'

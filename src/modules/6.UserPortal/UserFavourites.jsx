@@ -4,7 +4,7 @@ import { useFavorites } from '../../hooks/favorites'
 import { staticURL } from '../../utils/api'
 
 import { MasterLayout } from '../../layouts'
-import { Header, NoData, LoadingScreen } from '../../components/shared'
+import { Header, NoData, LoadingScreen } from '../shared'
 import { Card } from 'react-bootstrap'
 import { FaHeart } from 'react-icons/fa'
 

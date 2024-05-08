@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 
 import RecipesForm from './components/RecipesForm'
 import { MasterLayout } from '../../layouts'
-import { Banner } from '../../components/shared'
+import { Banner } from '../../modules/shared'
 import {  Spinner,   } from 'react-bootstrap'
 
 const EditRecipeItem = () => {

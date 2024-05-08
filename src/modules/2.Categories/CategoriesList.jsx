@@ -5,7 +5,7 @@ import { useModal } from '../../contexts/modalContext'
 import { useCategories } from '../../hooks/categories'
 
 import { MasterLayout } from '../../layouts'
-import { Header, Banner, LoadingScreen, NoData } from '../../components/shared'
+import { Header, Banner, LoadingScreen, NoData } from '../../modules/shared'
 import { CategoryFormModal } from './'
 import Svg from '../../assets/header/others.svg'
 import { Table, Pagination } from 'react-bootstrap'

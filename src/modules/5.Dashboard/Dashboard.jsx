@@ -1,7 +1,7 @@
 import { useAuth } from '../../contexts/authContext'
 
 import { MasterLayout } from '../../layouts'
-import { Header, Banner } from '../../components/shared'
+import { Header, Banner } from '../../modules/shared'
 import HomeSvg from '../../assets/header/home.svg'
 
 const Dashboard = () => {

@@ -21,8 +21,8 @@ import {
 } from 'react-icons/fa'
 import { HiTemplate } from 'react-icons/hi'
 // components
-import { GlobalModal } from './'
-import { ChangePass } from '../../modules/1.Authentication'
+import { GlobalModal } from '.'
+import { ChangePass } from '../1.Authentication'
 
 // assets
 import Togller from '../../assets/toggler.png'

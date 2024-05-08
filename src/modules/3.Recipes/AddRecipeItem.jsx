@@ -3,7 +3,7 @@
 
 import RecipesForm from './components/RecipesForm'
 import { MasterLayout } from '../../layouts'
-import { Banner } from '../../components/shared'
+import { Banner } from '../../modules/shared'
 
 const AddRecipeItem = () => {
   return (

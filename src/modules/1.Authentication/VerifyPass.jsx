@@ -2,7 +2,7 @@ import { useVerify } from '../../hooks/Auth'
 
 import { AuthLayout } from '../../layouts'
 import AuthForm from './components/AuthForm'
-import { LoadingSpinner } from '../../components/shared'
+import { LoadingSpinner } from '../shared'
 import { Form, InputGroup } from 'react-bootstrap'
 import { FaEnvelope, FaKey } from 'react-icons/fa'
 

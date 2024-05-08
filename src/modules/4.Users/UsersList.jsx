@@ -8,7 +8,7 @@ import { Pagination, Table } from 'react-bootstrap'
 import { FaTrashAlt } from 'react-icons/fa'
 import Svg from '../../assets/header/others.svg'
 import nodataImg from '../../assets/images/no-data.png'
-import { Banner, Header, LoadingScreen, NoData } from '../../components/shared'
+import { Banner, Header, LoadingScreen, NoData } from '../../modules/shared'
 import { MasterLayout } from '../../layouts'
 import DeleteUser from './components/DeleteUser'
 
