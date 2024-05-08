@@ -130,3 +130,15 @@
 
 
 
+.fav-img {
+  object-fit: cover;
+  width: 15rem !important;
+  max-height: 10rem;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+.wishlist {
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}

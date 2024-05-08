@@ -91,12 +91,12 @@ const RecipesList = () => {
     return exist ? true : false
   }
   const removeItemFromFavorites = (id) => {
-    console.log(id)
+    // console.log(id)
     // getting the favorite item that has recipe with this id from favorites state
     const favoriteItem = favoritesState.favorites.find(
       (favorite) => favorite.recipe.id === id
     )
-    console.log(favoriteItem)
+    // console.log(favoriteItem)
     // removing the favorite item from favorites
     removeFromFavorites(favoriteItem.id)
   }
@@ -161,7 +161,7 @@ const RecipesList = () => {
 
       {/* Recipes Table */}
       <div className='recipes-table'>
-        {state.loading ? (
+        {state.loading || favoritesState.loading ? (
           <div className='w-100 h-100 my-5 py-5 d-flex flex-column justify-content-center align-items-center gap-3'>
             <LoadingScreen />
           </div>

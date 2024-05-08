@@ -5,10 +5,7 @@ const NoData = () => {
     <div className='d-flex flex-column align-items-center justify-content-center gap-3 p-5'>
       <img src={nodataImg} alt='No Data' />
       <h3>No Data!</h3>
-      <p>
-        There is no data to show, you can add new data by clicking the button
-        below.
-      </p>
+      <p>Sorry, There is no data to show.</p>
     </div>
   )
 }
