@@ -321,7 +321,7 @@ const RecipesList = () => {
       </div>
 
       {/* Pagination */}
-      {!state.loading && state.totalNumberOfRecords >= 10 && (
+      {!state.loading && state.totalNumberOfRecords > 10 && (
         <Pagination className='d-flex justify-content-start '>
           <Pagination.First
             onClick={() => setPagination(1, state.pageSize)}

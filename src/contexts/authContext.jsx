@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
   }
 
   // User Types functionality
-  const [userType, setUserType] = useState('')
+  const [userType, setUserType] = useState('SuperAdmin')
   const getCurrentUser = async () => {
     setIsLoading(true)
     try {

@@ -44,7 +44,7 @@ const UserFavourites = () => {
                     <Card
                       className='position-relative'
                       style={{
-                        maxWidth: '15rem',
+                        maxWidth: '18rem',
                         boxShadow: '0 0 10px rgba(0,0,0,0.1)',
                       }}
                     >
