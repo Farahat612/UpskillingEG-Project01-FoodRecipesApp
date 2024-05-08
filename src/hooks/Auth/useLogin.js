@@ -50,7 +50,7 @@ const useLogin = () => {
     } catch (error) {
       // console.log(error.message)
       // Show error message
-      notify('error', error.response)
+      notify('error', error.response.data.message)
     } finally {
       // * End Loading
       setBtnLoading(false)

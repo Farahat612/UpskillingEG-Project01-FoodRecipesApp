@@ -29,7 +29,7 @@ function favoritesReducer(state = initialState, action) {
       return {
         ...state,
         favorites: state.favorites.filter(
-          (recipe) => recipe.id !== action.payload
+          (favorite) => favorite.id !== action.payload
         ),
         loading: false,
       }

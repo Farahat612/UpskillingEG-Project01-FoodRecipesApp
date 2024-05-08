@@ -12,7 +12,7 @@ const useFavorites = () => {
     try {
       dispatch({ type: 'GET_FAVORITES' })
       const response = await apiProtected.get('/userRecipe')
-      dispatch({ type: 'GET_FAVORITES_SUCCESS', payload: response.data })
+      dispatch({ type: 'GET_FAVORITES_SUCCESS', payload: response.data.data })
     } catch (error) {
       dispatch({ type: 'GET_FAVORITES_FAILURE' })
       notify(
@@ -25,7 +25,7 @@ const useFavorites = () => {
   const addToFavorites = async (recipeId) => {
     try {
       dispatch({ type: 'ADD_TO_FAVORITES' })
-      const response = await apiProtected.post('/userRecipes', { recipeId })
+      const response = await apiProtected.post('/userRecipe', { recipeId })
       dispatch({ type: 'ADD_TO_FAVORITES_SUCCESS', payload: response.data })
       notify('success', 'Recipe added to favorites successfully')
     } catch (error) {
@@ -37,11 +37,11 @@ const useFavorites = () => {
     }
   }
 
-  const removeFromFavorites = async (recipeId) => {
+  const removeFromFavorites = async (favoriteId) => {
     try {
       dispatch({ type: 'REMOVE_FROM_FAVORITES' })
-      await apiProtected.delete(`/userRecipes/${recipeId}`)
-      dispatch({ type: 'REMOVE_FROM_FAVORITES_SUCCESS', payload: recipeId })
+      await apiProtected.delete(`/userRecipe/${favoriteId}`)
+      dispatch({ type: 'REMOVE_FROM_FAVORITES_SUCCESS', payload: favoriteId })
       notify('success', 'Recipe removed from favorites successfully')
     } catch (error) {
       dispatch({ type: 'REMOVE_FROM_FAVORITES_FAILURE' })

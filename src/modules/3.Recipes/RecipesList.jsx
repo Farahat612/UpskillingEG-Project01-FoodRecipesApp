@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import { RecipesContext } from '../../contexts/recipesContext'
 import { CategoriesContext } from '../../contexts/categoriesContext'
 import { TagsContext } from '../../contexts/tagsContext'
+import { FavoritesContext } from '../../contexts/favoritesContext'
 import { useAuth } from '../../contexts/authContext'
 import { useModal } from '../../contexts/modalContext'
 import { useRecipes } from '../../hooks/recipes'
 import { useCategories } from '../../hooks/categories'
+import { useFavorites } from '../../hooks/favorites'
 import { staticURL } from '../../utils/api'
 
 import { MasterLayout } from '../../layouts'
@@ -74,6 +76,30 @@ const RecipesList = () => {
 
   // delete modal
   const { openDeleteModal, setActionRecipe } = useModal()
+
+  // favorites
+  const { state: favoritesState } = useContext(FavoritesContext)
+  const { getFavorites, addToFavorites, removeFromFavorites } = useFavorites()
+  useEffect(() => {
+    userType !== 'SuperAdmin' && getFavorites()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  const isFavorite = (recipeId) => {
+    const exist = favoritesState.favorites.find(
+      (favorite) => favorite.recipe.id === recipeId
+    )
+    return exist ? true : false
+  }
+  const removeItemFromFavorites = (id) => {
+    console.log(id)
+    // getting the favorite item that has recipe with this id from favorites state
+    const favoriteItem = favoritesState.favorites.find(
+      (favorite) => favorite.recipe.id === id
+    )
+    console.log(favoriteItem)
+    // removing the favorite item from favorites
+    removeFromFavorites(favoriteItem.id)
+  }
 
   return (
     <MasterLayout>
@@ -251,11 +277,27 @@ const RecipesList = () => {
                               <p
                                 className='dropdown-item cursor-pointer text-success d-flex gap-3 align-items-center m-0'
                                 id='delete-recipe'
+                                onClick={() => {
+                                  isFavorite(recipe.id)
+                                    ? removeItemFromFavorites(recipe.id)
+                                    : addToFavorites(recipe.id)
+                                }}
                               >
-                                <FaHeart className='pe-none' />
-                                <span className='text-dark pe-none'>
-                                  Add to Favourite
-                                </span>
+                                {isFavorite(recipe.id) ? (
+                                  <>
+                                    <FaHeart className='pe-none' />
+                                    <span className='text-dark pe-none'>
+                                      Remove from Favourites
+                                    </span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <FaRegHeart className='pe-none' />
+                                    <span className='text-dark pe-none'>
+                                      Add to Favourites
+                                    </span>
+                                  </>
+                                )}
                               </p>
                             </li>
                           )}
