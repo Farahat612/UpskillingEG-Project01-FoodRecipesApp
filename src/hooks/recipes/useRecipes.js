@@ -47,8 +47,8 @@ const useRecipes = () => {
     try {
       dispatch({ type: 'ADD_RECIPE' })
       const response = await apiProtected.post('/Recipe', newRecipeFormData)
-      notify('success', 'Recipe added successfully')
       dispatch({ type: 'ADD_RECIPE_SUCCESS', payload: response.data })
+      notify('success', 'Recipe added successfully')
     } catch (error) {
       dispatch({ type: 'ADD_RECIPE_FAILURE' })
       notify('error', `Error adding recipe - ${error.response.data.message}`)

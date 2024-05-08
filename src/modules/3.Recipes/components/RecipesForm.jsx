@@ -33,7 +33,7 @@ const RecipesForm = ({ recipe }) => {
   }, [])
 
   // userecipies hook
-  const { addRecipe, updateRecipe } = useRecipes()
+  const { addRecipe, updateRecipe, getRecipes } = useRecipes()
   // react hook form
   const {
     register,
@@ -70,9 +70,9 @@ const RecipesForm = ({ recipe }) => {
   const { state } = useContext(RecipesContext)
 
   // submit function
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const formData = appendFormData(data)
-    recipe ? updateRecipe(formData, recipe.id) : addRecipe(formData)
+    recipe ? await updateRecipe(formData, recipe.id) : await addRecipe(formData)
     state.loading != true && navigate('/recipes')
   }
 

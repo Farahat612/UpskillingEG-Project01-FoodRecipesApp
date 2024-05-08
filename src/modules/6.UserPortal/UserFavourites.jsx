@@ -41,10 +41,17 @@ const UserFavourites = () => {
               <div className='d-flex gap-3 flex-wrap justify-content-start m-0'>
                 {state.favorites.map((item) => (
                   <div key={item.id} className='mb-2'>
-                    <Card className='position-relative'>
-                      <span 
+                    <Card
+                      className='position-relative'
+                      style={{
+                        maxWidth: '15rem',
+                        boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+                      }}
+                    >
+                      <span
                         onClick={() => removeFromFavorites(item.id)}
-                      className='position-absolute wishlist bg-white px-2 py-1 rounded rounded-2 border border-dark'>
+                        className='position-absolute wishlist bg-white px-2 py-1 rounded rounded-2 border border-dark'
+                      >
                         <FaHeart size={'20'} className='text-success' />
                       </span>
                       <Card.Img

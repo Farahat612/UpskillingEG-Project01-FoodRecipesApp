@@ -81,7 +81,7 @@ const RecipesList = () => {
   const { state: favoritesState } = useContext(FavoritesContext)
   const { getFavorites, addToFavorites, removeFromFavorites } = useFavorites()
   useEffect(() => {
-    userType !== 'SuperAdmin' && getFavorites()
+    userType === 'SystemUser' && getFavorites()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const isFavorite = (recipeId) => {

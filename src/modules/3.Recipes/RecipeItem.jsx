@@ -3,13 +3,15 @@ import { useRecipes } from '../../hooks/recipes'
 import { RecipesContext } from '../../contexts/recipesContext'
 import { useAuth } from '../../contexts/authContext'
 import { useModal } from '../../contexts/modalContext'
+import { FavoritesContext } from '../../contexts/favoritesContext'
+import { useFavorites } from '../../hooks/favorites'
 import { staticURL } from '../../utils/api'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { MasterLayout } from '../../layouts'
 import { DeleteRecipeItem } from './'
 import { Button, Spinner, Card, Table } from 'react-bootstrap'
-import { FaEdit, FaTrashAlt } from 'react-icons/fa'
+import { FaEdit, FaTrashAlt, FaRegHeart, FaHeart } from 'react-icons/fa'
 import nodataImg from '../../assets/images/no-data.png'
 
 const RecipeItem = () => {
@@ -27,6 +29,30 @@ const RecipeItem = () => {
   }, [id])
 
   const { openDeleteModal, setActionRecipe } = useModal()
+
+  // favorites
+  const { state: favoritesState } = useContext(FavoritesContext)
+  const { getFavorites, addToFavorites, removeFromFavorites } = useFavorites()
+  useEffect(() => {
+    userType !== 'SuperAdmin' && getFavorites()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  const isFavorite = (recipeId) => {
+    const exist = favoritesState.favorites.find(
+      (favorite) => favorite.recipe.id === recipeId
+    )
+    return exist ? true : false
+  }
+  const removeItemFromFavorites = (id) => {
+    // console.log(id)
+    // getting the favorite item that has recipe with this id from favorites state
+    const favoriteItem = favoritesState.favorites.find(
+      (favorite) => favorite.recipe.id === id
+    )
+    // console.log(favoriteItem)
+    // removing the favorite item from favorites
+    removeFromFavorites(favoriteItem.id)
+  }
 
   if (state.loading) {
     return (
@@ -67,7 +93,7 @@ const RecipeItem = () => {
                 Recipe #{state.selectedRecipe?.id} Details
               </h3>
             </div>
-            {userType === 'SuperAdmin' && (
+            {userType === 'SuperAdmin' ? (
               <>
                 <div className='d-flex justify-content-end  gap-3'>
                   <Button
@@ -91,6 +117,32 @@ const RecipeItem = () => {
                     <FaTrashAlt />
                     Delete
                   </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  {isFavorite(state.selectedRecipe.id) ? (
+                    <Button
+                      variant='danger'
+                      className=' px-4 d-flex align-items-center gap-3'
+                      onClick={() =>
+                        removeItemFromFavorites(state.selectedRecipe.id)
+                      }
+                    >
+                      <FaHeart />
+                      Unsave
+                    </Button>
+                  ) : (
+                    <Button
+                      variant='success'
+                      className=' px-4 d-flex align-items-center gap-3'
+                      onClick={() => addToFavorites(state.selectedRecipe.id)}
+                    >
+                      <FaRegHeart />
+                      Save
+                    </Button>
+                  )}
                 </div>
               </>
             )}
