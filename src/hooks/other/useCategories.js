@@ -1,6 +1,6 @@
 // Importing necessary modules
 import { useContext } from 'react'
-import { CategoriesContext } from '../../contexts/categoriesContext.jsx'
+import { CategoriesContext } from '../../contexts/modules/categoriesContext.jsx'
 import { apiProtected } from '../../utils/api.js' // for making API calls
 import { notify } from '../../utils/notify.js'
 

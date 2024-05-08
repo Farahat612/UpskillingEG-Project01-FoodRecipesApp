@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { UsersContext } from '../../contexts/usersContext'
+import { UsersContext } from '../../contexts/modules/usersContext'
 import { useModal } from '../../contexts/global/modalContext'
 import { useUsers } from '../../hooks/other'
 import { staticURL } from '../../utils/api'

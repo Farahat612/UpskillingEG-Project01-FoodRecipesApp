@@ -1,6 +1,6 @@
 // Importing necessary modules
 import { useContext } from 'react'
-import { UsersContext } from '../../contexts/usersContext'
+import { UsersContext } from '../../contexts/modules/usersContext'
 import { apiProtected } from '../../utils/api' // for making API calls
 import { notify } from '../../utils/notify'
 

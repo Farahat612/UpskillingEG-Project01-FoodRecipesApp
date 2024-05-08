@@ -1,6 +1,6 @@
 // Importing necessary modules
 import { useContext } from 'react'
-import { FavoritesContext } from '../../contexts/favoritesContext'
+import { FavoritesContext } from '../../contexts/modules/favoritesContext'
 import { apiProtected } from '../../utils/api' // for making API calls
 import { notify } from '../../utils/notify'
 

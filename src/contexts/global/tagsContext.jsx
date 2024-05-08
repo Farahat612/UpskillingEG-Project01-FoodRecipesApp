@@ -1,8 +1,8 @@
 // Imports
 import PropTypes from 'prop-types'
 import { createContext, useState, useEffect } from 'react'
-import { apiProtected } from '../utils/api'
-import { notify } from '../utils/notify'
+import { apiProtected } from '../../utils/api'
+import { notify } from '../../utils/notify'
 
 // Creating the context
 export const TagsContext = createContext()

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from 'react'
-import { CategoriesContext } from '../../contexts/categoriesContext'
+import { CategoriesContext } from '../../contexts/modules/categoriesContext'
 import { useModal } from '../../contexts/global/modalContext'
 import { useCategories } from '../../hooks/other'
 

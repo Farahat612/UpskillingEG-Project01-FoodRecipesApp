@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react'
-import { FavoritesContext } from '../../contexts/favoritesContext'
+import { FavoritesContext } from '../../contexts/modules/favoritesContext'
 import { useFavorites } from '../../hooks/other'
 import { staticURL } from '../../utils/api'
 

@@ -1,6 +1,6 @@
 // Importing necessary modules
 import { useContext } from 'react'
-import { RecipesContext } from '../../contexts/recipesContext.jsx'
+import { RecipesContext } from '../../contexts/modules/recipesContext.jsx'
 import { apiProtected } from '../../utils/api.js' // for making API calls
 import { notify } from '../../utils/notify.js'
 
@@ -58,10 +58,7 @@ const useRecipes = () => {
   const updateRecipe = async (updatedRecipe, id) => {
     try {
       dispatch({ type: 'UPDATE_RECIPE' })
-      const response = await apiProtected.put(
-        `/Recipe/${id}`,
-        updatedRecipe
-      )
+      const response = await apiProtected.put(`/Recipe/${id}`, updatedRecipe)
       notify('success', 'Recipe updated successfully')
       dispatch({ type: 'UPDATE_RECIPE_SUCCESS', payload: response.data })
     } catch (error) {
