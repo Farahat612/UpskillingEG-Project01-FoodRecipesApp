@@ -2,7 +2,7 @@
 import { jwtDecode } from 'jwt-decode'
 import { useContext, createContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { apiProtected } from '../utils/api'
+import { apiProtected } from '../../utils/api'
 
 const AuthContext = createContext()
 

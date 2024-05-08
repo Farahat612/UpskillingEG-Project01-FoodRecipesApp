@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuth } from '../../contexts/authContext'
+import { useAuth } from '../../contexts/global/authContext'
 import PropTypes from 'prop-types'
 
 import { LoadingScreen } from '.'

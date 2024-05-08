@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 // react-hook-form
 import { useForm } from 'react-hook-form'
 // context
-import { useAuth } from '../../contexts/authContext'
-import { useModal } from '../../contexts/modalContext.jsx'
+import { useAuth } from '../../contexts/global/authContext.jsx'
+import { useModal } from '../../contexts/global/modalContext.jsx'
 // axios
 import { apiPublic } from '../../utils/api.js'
 // toast

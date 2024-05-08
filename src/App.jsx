@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 // react-router-dom
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 // contexts
-import { useAuth } from './contexts/authContext'
+import { useAuth } from './contexts/global/authContext'
 // react-toastify
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'

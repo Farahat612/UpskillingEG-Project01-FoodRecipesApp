@@ -1,4 +1,4 @@
-import { useAuth } from '../../contexts/authContext'
+import { useAuth } from '../../contexts/global/authContext'
 
 import { MasterLayout } from '../../layouts'
 import { Header, Banner } from '../../modules/shared'

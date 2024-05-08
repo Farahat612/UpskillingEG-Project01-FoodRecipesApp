@@ -1,4 +1,4 @@
-import { useModal } from '../../../contexts/modalContext'
+import { useModal } from '../../../contexts/global/modalContext'
 import { useUsers } from '../../../hooks/other'
 
 import { DeleteData } from '../../../modules/shared'

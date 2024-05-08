@@ -1,4 +1,4 @@
-import { useModal } from '../../contexts/modalContext'
+import { useModal } from '../../contexts/global/modalContext'
 import PropTypes from 'prop-types'
 import { Modal } from 'react-bootstrap'
 import { IoClose } from 'react-icons/io5'

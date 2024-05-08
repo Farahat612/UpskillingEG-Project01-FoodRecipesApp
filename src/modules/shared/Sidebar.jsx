@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 // react-router-dom
 import { NavLink } from 'react-router-dom'
 // contexts
-import { useAuth } from '../../contexts/authContext'
-import { useModal } from '../../contexts/modalContext'
+import { useAuth } from '../../contexts/global/authContext'
+import { useModal } from '../../contexts/global/modalContext'
 // toast
 import { toast } from 'react-toastify'
 // react-pro-sidebar

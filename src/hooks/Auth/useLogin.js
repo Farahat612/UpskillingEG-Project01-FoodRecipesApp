@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 // react-hook-form
 import { useForm } from 'react-hook-form'
 // context
-import { useAuth } from '../../contexts/authContext'
+import { useAuth } from '../../contexts/global/authContext.jsx'
 // axios
 import { apiPublic } from '../../utils/api.js' // for making API calls
 // toast

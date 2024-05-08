@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { FaArrowRight } from 'react-icons/fa6'
 import PropTypes from 'prop-types'
-import { useModal } from '../../contexts/modalContext'
+import { useModal } from '../../contexts/global/modalContext'
 
 const Banner = ({ buttonTitle, buttonDestination, children, btnId }) => {
   const navigate = useNavigate()

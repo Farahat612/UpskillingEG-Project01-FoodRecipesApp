@@ -1,4 +1,4 @@
-import { useAuth } from '../../contexts/authContext'
+import { useAuth } from '../../contexts/global/authContext'
 import { FaBell, FaSearch, FaChevronDown } from 'react-icons/fa'
 import Avatar from '../../assets/avatar.png'
 
