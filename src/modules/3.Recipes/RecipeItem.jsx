@@ -1,6 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { useRecipes } from '../../hooks/recipes'
 import { RecipesContext } from '../../contexts/recipesContext'
+import { useAuth } from '../../contexts/authContext'
 import { useModal } from '../../contexts/modalContext'
 import { staticURL } from '../../utils/api'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -12,6 +13,7 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import nodataImg from '../../assets/images/no-data.png'
 
 const RecipeItem = () => {
+  const { userType } = useAuth()
   const navigate = useNavigate()
   // getting the id from the url
   const { id } = useParams()
@@ -65,29 +67,33 @@ const RecipeItem = () => {
                 Recipe #{state.selectedRecipe?.id} Details
               </h3>
             </div>
-            <div className='d-flex justify-content-end  gap-3'>
-              <Button
-                variant='success'
-                className=' px-4 d-flex align-items-center gap-3'
-                id='add-category'
-                onClick={() => navigate(`/editRecipe/${id}`)}
-              >
-                <FaEdit />
-                Edit
-              </Button>
-              <Button
-                variant='danger'
-                className=' px-4 d-flex align-items-center gap-3'
-                id='add-category'
-                onClick={() => {
-                  setActionRecipe(state.selectedRecipe)
-                  openDeleteModal()
-                }}
-              >
-                <FaTrashAlt />
-                Delete
-              </Button>
-            </div>
+            {userType === 'SuperAdmin' && (
+              <>
+                <div className='d-flex justify-content-end  gap-3'>
+                  <Button
+                    variant='success'
+                    className=' px-4 d-flex align-items-center gap-3'
+                    id='add-category'
+                    onClick={() => navigate(`/editRecipe/${id}`)}
+                  >
+                    <FaEdit />
+                    Edit
+                  </Button>
+                  <Button
+                    variant='danger'
+                    className=' px-4 d-flex align-items-center gap-3'
+                    id='add-category'
+                    onClick={() => {
+                      setActionRecipe(state.selectedRecipe)
+                      openDeleteModal()
+                    }}
+                  >
+                    <FaTrashAlt />
+                    Delete
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
           {state.selectedRecipe && (
             <Card>
