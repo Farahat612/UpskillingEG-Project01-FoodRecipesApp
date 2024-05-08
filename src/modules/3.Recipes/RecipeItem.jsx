@@ -1,10 +1,10 @@
 import { useEffect, useContext } from 'react'
-import { useRecipes } from '../../hooks/recipes'
+import { useRecipes } from '../../hooks/other'
 import { RecipesContext } from '../../contexts/recipesContext'
 import { useAuth } from '../../contexts/authContext'
 import { useModal } from '../../contexts/modalContext'
 import { FavoritesContext } from '../../contexts/favoritesContext'
-import { useFavorites } from '../../hooks/favorites'
+import { useFavorites } from '../../hooks/other'
 import { staticURL } from '../../utils/api'
 import { useNavigate, useParams } from 'react-router-dom'
 

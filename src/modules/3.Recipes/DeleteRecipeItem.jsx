@@ -1,5 +1,5 @@
 import { useModal } from '../../contexts/modalContext'
-import { useRecipes } from '../../hooks/recipes'
+import { useRecipes } from '../../hooks/other'
 
 import { DeleteData } from '../../modules/shared'
 import { Button, Modal } from 'react-bootstrap'

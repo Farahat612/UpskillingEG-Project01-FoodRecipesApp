@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react'
 import { FavoritesContext } from '../../contexts/favoritesContext'
-import { useFavorites } from '../../hooks/favorites'
+import { useFavorites } from '../../hooks/other'
 import { staticURL } from '../../utils/api'
 
 import { MasterLayout } from '../../layouts'

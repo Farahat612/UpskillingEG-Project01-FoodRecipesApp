@@ -2,7 +2,7 @@
 import { useContext, useEffect } from 'react'
 import { CategoriesContext } from '../../contexts/categoriesContext'
 import { useModal } from '../../contexts/modalContext'
-import { useCategories } from '../../hooks/categories'
+import { useCategories } from '../../hooks/other'
 
 import { MasterLayout } from '../../layouts'
 import { Header, Banner, LoadingScreen, NoData } from '../../modules/shared'

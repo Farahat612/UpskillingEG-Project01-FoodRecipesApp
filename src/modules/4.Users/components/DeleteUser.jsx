@@ -1,5 +1,5 @@
 import { useModal } from '../../../contexts/modalContext'
-import { useUsers } from '../../../hooks/users'
+import { useUsers } from '../../../hooks/other'
 
 import { DeleteData } from '../../../modules/shared'
 import { Button, Modal } from 'react-bootstrap'

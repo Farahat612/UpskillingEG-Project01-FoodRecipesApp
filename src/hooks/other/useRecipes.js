@@ -1,8 +1,8 @@
 // Importing necessary modules
 import { useContext } from 'react'
 import { RecipesContext } from '../../contexts/recipesContext.jsx'
-import { apiProtected } from '../../utils/api' // for making API calls
-import { notify } from '../../utils/notify'
+import { apiProtected } from '../../utils/api.js' // for making API calls
+import { notify } from '../../utils/notify.js'
 
 const useRecipes = () => {
   const { dispatch } = useContext(RecipesContext)
