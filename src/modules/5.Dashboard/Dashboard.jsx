@@ -5,7 +5,7 @@ import { Header, Banner } from '../../components/shared'
 import HomeSvg from '../../assets/header/home.svg'
 
 const Dashboard = () => {
-  const { user } = useAuth()
+  const { user, userType } = useAuth()
   return (
     <MasterLayout>
       <div className='d-flex flex-column gap-3'>
@@ -16,9 +16,13 @@ const Dashboard = () => {
         '
           imgUrl={HomeSvg}
         />
-        <Banner buttonTitle='Fill Recipes' buttonDestination='/recipes'>
+        <Banner
+          buttonTitle={userType === 'SuperAdmin' ? 'Fill Recipes' : 'Recipes'}
+          buttonDestination='/recipes'
+        >
           <h4>
-            Fill the <span className='text-success'>Recipes!</span>
+            {userType === 'SuperAdmin' ? 'Fill' : 'Show '} the{' '}
+            <span className='text-success'>Recipes!</span>
           </h4>
           <p>
             you can now fill the meals easily using the table and form , click
