@@ -10,11 +10,11 @@ const useFavorites = () => {
   // Defining the CRUD operations
   const getFavorites = async () => {
     try {
-      dispatch({ type: 'GET_FAVORITES' })
+      dispatch({ type: 'SET_LOADING', payload: true })
       const response = await apiProtected.get('/userRecipe')
       dispatch({ type: 'GET_FAVORITES_SUCCESS', payload: response.data.data })
     } catch (error) {
-      dispatch({ type: 'GET_FAVORITES_FAILURE' })
+      dispatch({ type: 'SET_LOADING', payload: false })
       notify(
         'error',
         `Error fetching favorites - ${error.response.data.message}`
@@ -24,12 +24,12 @@ const useFavorites = () => {
 
   const addToFavorites = async (recipeId) => {
     try {
-      dispatch({ type: 'ADD_TO_FAVORITES' })
+      dispatch({ type: 'SET_LOADING', payload: true })
       const response = await apiProtected.post('/userRecipe', { recipeId })
       dispatch({ type: 'ADD_TO_FAVORITES_SUCCESS', payload: response.data })
       notify('success', 'Recipe added to favorites successfully')
     } catch (error) {
-      dispatch({ type: 'ADD_TO_FAVORITES_FAILURE' })
+      dispatch({ type: 'SET_LOADING', payload: false })
       notify(
         'error',
         `Error adding recipe to favorites - ${error.response.data.message}`
@@ -39,12 +39,12 @@ const useFavorites = () => {
 
   const removeFromFavorites = async (favoriteId) => {
     try {
-      dispatch({ type: 'REMOVE_FROM_FAVORITES' })
+      dispatch({ type: 'SET_LOADING', payload: true })
       await apiProtected.delete(`/userRecipe/${favoriteId}`)
       dispatch({ type: 'REMOVE_FROM_FAVORITES_SUCCESS', payload: favoriteId })
       notify('success', 'Recipe removed from favorites successfully')
     } catch (error) {
-      dispatch({ type: 'REMOVE_FROM_FAVORITES_FAILURE' })
+      dispatch({ type: 'SET_LOADING', payload: false })
       notify(
         'error',
         `Error removing recipe from favorites - ${error.response.data.message}`
