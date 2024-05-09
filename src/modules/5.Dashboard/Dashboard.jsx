@@ -1,11 +1,12 @@
-import { useAuth } from '../../contexts/global/authContext'
+import { useContext } from 'react'
+import { AuthContext } from '../../contexts/global/authContext'
 
 import { MasterLayout } from '../../layouts'
 import { Header, Banner } from '../../modules/shared'
 import HomeSvg from '../../assets/header/home.svg'
 
 const Dashboard = () => {
-  const { user, userType } = useAuth()
+  const { user, userType } = useContext(AuthContext)
   return (
     <MasterLayout>
       <div className='d-flex flex-column gap-3'>

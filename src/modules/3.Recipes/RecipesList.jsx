@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/global/authContext'
+import { AuthContext } from '../../contexts/global/authContext'
 import { useModal } from '../../contexts/global/modalContext'
 import { TagsContext } from '../../contexts/global/tagsContext'
 import { CategoriesContext } from '../../contexts/modules/categoriesContext'
@@ -23,7 +23,7 @@ import {
 import { DeleteRecipeItem } from './'
 
 const RecipesList = () => {
-  const { userType } = useAuth()
+  const { userType } = useContext(AuthContext)
   // navigate
   const navigate = useNavigate()
   // categories for filteration

@@ -1,11 +1,11 @@
 //react
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 // react-router-dom
 import { useNavigate } from 'react-router-dom'
 // react-hook-form
 import { useForm } from 'react-hook-form'
 // context
-import { useAuth } from '../../contexts/global/authContext.jsx'
+import { AuthContext } from '../../contexts/global/authContext.jsx'
 import { useModal } from '../../contexts/global/modalContext.jsx'
 // axios
 import { apiPublic } from '../../utils/api.js'
@@ -15,7 +15,7 @@ import { notify } from '../../utils/notify'
 const useChange = () => {
   // context
   const { closeModal } = useModal()
-  const { logout } = useAuth()
+  const { logout } = useContext(AuthContext)
   // navigate initialization
   const navigate = useNavigate()
   // Loading State

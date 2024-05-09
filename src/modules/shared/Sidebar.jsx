@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 // react
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 // react-router-dom
 import { NavLink } from 'react-router-dom'
 // contexts
-import { useAuth } from '../../contexts/global/authContext'
+import { AuthContext } from '../../contexts/global/authContext'
 import { useModal } from '../../contexts/global/modalContext'
 // toast
 import { toast } from 'react-toastify'
@@ -35,7 +35,7 @@ const SideBar = () => {
   }
 
   // logout functionality
-  const { logout, userType } = useAuth()
+  const { logout, userType } = useContext(AuthContext)
   const handleLogoutClick = () => {
     logout()
     toast.warn('Logged out successfully', { autoClose: 1500 })

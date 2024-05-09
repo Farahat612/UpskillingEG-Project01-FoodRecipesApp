@@ -1,11 +1,11 @@
 //react
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 // react-router-dom
 import { useNavigate } from 'react-router-dom'
 // react-hook-form
 import { useForm } from 'react-hook-form'
 // context
-import { useAuth } from '../../contexts/global/authContext.jsx'
+import { AuthContext } from '../../contexts/global/authContext.jsx'
 // axios
 import { apiPublic } from '../../utils/api.js' // for making API calls
 // toast
@@ -19,7 +19,7 @@ const useLogin = () => {
   // initialize navigate to redirect to another page
   const navigate = useNavigate()
   // Save user data to context
-  const { saveUser } = useAuth()
+  const { saveUser } = useContext(AuthContext)
 
   // Destructure register, handleSubmit, errors from useForm() hook
   const {

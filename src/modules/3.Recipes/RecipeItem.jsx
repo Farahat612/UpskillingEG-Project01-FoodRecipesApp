@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { useRecipes } from '../../hooks/other'
 import { RecipesContext } from '../../contexts/modules/recipesContext'
-import { useAuth } from '../../contexts/global/authContext'
+import { AuthContext } from '../../contexts/global/authContext'
 import { useModal } from '../../contexts/global/modalContext'
 import { FavoritesContext } from '../../contexts/modules/favoritesContext'
 import { useFavorites } from '../../hooks/other'
@@ -15,7 +15,7 @@ import { FaEdit, FaTrashAlt, FaRegHeart, FaHeart } from 'react-icons/fa'
 import nodataImg from '../../assets/images/no-data.png'
 
 const RecipeItem = () => {
-  const { userType } = useAuth()
+  const { userType } = useContext(AuthContext)
   const navigate = useNavigate()
   // getting the id from the url
   const { id } = useParams()
