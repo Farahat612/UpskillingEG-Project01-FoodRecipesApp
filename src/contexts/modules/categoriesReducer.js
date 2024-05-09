@@ -12,8 +12,9 @@ const initialState = {
 // Reducer function
 function categoriesReducer(state = initialState, action) {
   switch (action.type) {
-    case 'GET_CATEGORIES':
-      return { ...state, loading: true }
+    case 'SET_LOADING':
+      return { ...state, loading: action.payload }
+
     case 'GET_CATEGORIES_SUCCESS':
       return {
         ...state,
@@ -22,50 +23,41 @@ function categoriesReducer(state = initialState, action) {
         totalNumberOfPages: action.payload.totalNumberOfPages,
         loading: false,
       }
-    case 'GET_CATEGORIES_FAILURE':
-      return { ...state, loading: false }
-    case 'SET_FILTER':
-      return { ...state, filter: action.payload }
-    case 'SET_PAGINATION':
-      return {
-        ...state,
-        pageNumber: action.payload.pageNumber,
-        pageSize: action.payload.pageSize,
-      }
-    case 'ADD_CATEGORY':
-      return { ...state, loading: true }
+
     case 'ADD_CATEGORY_SUCCESS':
       return {
         ...state,
         categories: [action.payload, ...state.categories],
-        loading: false, 
+        loading: false,
       }
-    case 'ADD_CATEGORY_FAILURE':
-      return { ...state, loading: false }
-    case 'UPDATE_CATEGORY':
-      return { ...state, loading: true }
+
     case 'UPDATE_CATEGORY_SUCCESS':
       return {
         ...state,
         categories: state.categories.map((category) =>
           category.id === action.payload.id ? action.payload : category
         ),
-        loading: false, 
+        loading: false,
       }
-    case 'UPDATE_CATEGORY_FAILURE':
-      return { ...state, loading: false }
-    case 'DELETE_CATEGORY':
-      return { ...state, loading: true }
+
     case 'DELETE_CATEGORY_SUCCESS':
       return {
         ...state,
         categories: state.categories.filter(
           (category) => category.id !== action.payload
         ),
-        loading: false, 
+        loading: false,
       }
-    case 'DELETE_CATEGORY_FAILURE':
-      return { ...state, loading: false }
+
+    case 'SET_FILTER':
+      return { ...state, filter: action.payload }
+
+    case 'SET_PAGINATION':
+      return {
+        ...state,
+        pageNumber: action.payload.pageNumber,
+        pageSize: action.payload.pageSize,
+      }
     default:
       return state
   }
