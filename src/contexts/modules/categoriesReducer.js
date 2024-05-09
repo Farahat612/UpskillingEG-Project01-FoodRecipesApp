@@ -15,6 +15,7 @@ function categoriesReducer(state = initialState, action) {
     case 'SET_LOADING':
       return { ...state, loading: action.payload }
 
+    // CRUD operations
     case 'GET_CATEGORIES_SUCCESS':
       return {
         ...state,
@@ -49,6 +50,7 @@ function categoriesReducer(state = initialState, action) {
         loading: false,
       }
 
+    // Filter and Pagination operations
     case 'SET_FILTER':
       return { ...state, filter: action.payload }
 
