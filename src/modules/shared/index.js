@@ -10,6 +10,7 @@ import Banner from './Banner'
 import NoData from './NoData'
 import DeleteData from './DeleteData'
 import DataTable from './DataTable'
+import TableImg from './TableImg'
 
 export {
   RouteGuard,
@@ -24,4 +25,5 @@ export {
   NoData,
   DeleteData,
   DataTable,
+  TableImg,
 }

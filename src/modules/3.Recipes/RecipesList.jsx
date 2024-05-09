@@ -7,19 +7,18 @@ import { CategoriesContext } from '../../contexts/modules/categoriesContext'
 import { FavoritesContext } from '../../contexts/modules/favoritesContext'
 import { RecipesContext } from '../../contexts/modules/recipesContext'
 import { useCategories, useFavorites, useRecipes } from '../../hooks/other'
-import { staticURL } from '../../utils/api'
 
 import { Pagination } from 'react-bootstrap'
 import { FaEdit, FaEye, FaHeart, FaRegHeart, FaTrashAlt } from 'react-icons/fa'
 import { IoEllipsisHorizontal } from 'react-icons/io5'
 import Svg from '../../assets/header/others.svg'
-import nodataImg from '../../assets/images/no-data.png'
 import { MasterLayout } from '../../layouts'
 import {
   Banner,
   DataTable,
   Header,
-  NoData
+  NoData,
+  TableImg,
 } from '../../modules/shared'
 import { DeleteRecipeItem } from './'
 
@@ -181,19 +180,10 @@ const RecipesList = () => {
                 <th scope='row'>{index + 1}</th>
                 <td>{recipe.name}</td>
                 <td>
-                  <img
-                    src={
-                      recipe.imagePath
-                        ? `${staticURL}/${recipe.imagePath}`
-                        : nodataImg
-                    }
-                    alt={recipe.imagePath ? recipe.name : 'No Image'}
-                    className='img-fluid '
-                    style={{
-                      width: '70px',
-                      height: '40px',
-                      objectFit: 'cover',
-                    }}
+                  <TableImg
+                    path={recipe.imagePath}
+                    altTxt={recipe.name}
+                    fit='cover'
                   />
                 </td>
                 <td>{recipe.price}</td>

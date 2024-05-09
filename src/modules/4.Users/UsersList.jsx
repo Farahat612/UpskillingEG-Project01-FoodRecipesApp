@@ -2,14 +2,18 @@ import { useContext, useEffect } from 'react'
 import { useModal } from '../../contexts/global/modalContext'
 import { UsersContext } from '../../contexts/modules/usersContext'
 import { useUsers } from '../../hooks/other'
-import { staticURL } from '../../utils/api'
 
 import { Pagination } from 'react-bootstrap'
 import { FaTrashAlt } from 'react-icons/fa'
 import Svg from '../../assets/header/others.svg'
-import nodataImg from '../../assets/images/no-data.png'
 import { MasterLayout } from '../../layouts'
-import { Banner, DataTable, Header, NoData } from '../../modules/shared'
+import {
+  Banner,
+  DataTable,
+  Header,
+  NoData,
+  TableImg,
+} from '../../modules/shared'
 import DeleteUser from './components/DeleteUser'
 
 const UsersList = () => {
@@ -132,19 +136,10 @@ const UsersList = () => {
                 <th scope='row'>{index + 1}</th>
                 <td>{user.userName}</td>
                 <td>
-                  <img
-                    src={
-                      user.imagePath
-                        ? `${staticURL}/${user.imagePath}`
-                        : nodataImg
-                    }
-                    alt={user.imagePath ? user.userName : 'No Image'}
-                    className='img-fluid '
-                    style={{
-                      width: '70px',
-                      height: '40px',
-                      objectFit: 'contain',
-                    }}
+                  <TableImg
+                    path={user.imagePath}
+                    altTxt={user.userName}
+                    fit='contain'
                   />
                 </td>
                 <td className='text-truncate' style={{ maxWidth: '150px' }}>
