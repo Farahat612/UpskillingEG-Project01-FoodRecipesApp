@@ -1,13 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import AuthProvider from './contexts/authContext.jsx'
-import ModalProvider from './contexts/modalContext.jsx'
-import { CategoriesProvider } from './contexts/categoriesContext.jsx'
-import { RecipesProvider } from './contexts/recipesContext.jsx'
-import { TagsProvider } from './contexts/tagsContext.jsx'
-import { UsersProvider } from './contexts/usersContext.jsx'
-import { FavoritesProvider } from './contexts/favoritesContext.jsx'
+import AuthProvider from './contexts/global/authContext.jsx'
+import ModalProvider from './contexts/global/modalContext.jsx'
+import SidebarProvider from './contexts/global/sidebarContext.jsx'
+import { CategoriesProvider } from './contexts/modules/categoriesContext.jsx'
+import { RecipesProvider } from './contexts/modules/recipesContext.jsx'
+import { TagsProvider } from './contexts/global/tagsContext.jsx'
+import { UsersProvider } from './contexts/modules/usersContext.jsx'
+import { FavoritesProvider } from './contexts/modules/favoritesContext.jsx'
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
@@ -23,7 +24,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <TagsProvider>
               <UsersProvider>
                 <FavoritesProvider>
-                  <App />
+                  <SidebarProvider>
+                    <App />
+                  </SidebarProvider>
                 </FavoritesProvider>
               </UsersProvider>
             </TagsProvider>

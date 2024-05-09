@@ -9,6 +9,9 @@ import Header from './Header'
 import Banner from './Banner'
 import NoData from './NoData'
 import DeleteData from './DeleteData'
+import DataTable from './DataTable'
+import TableImg from './TableImg'
+import CustomPagination from './CustomPagination'
 
 export {
   RouteGuard,
@@ -22,4 +25,7 @@ export {
   Banner,
   NoData,
   DeleteData,
+  DataTable,
+  TableImg,
+  CustomPagination,
 }

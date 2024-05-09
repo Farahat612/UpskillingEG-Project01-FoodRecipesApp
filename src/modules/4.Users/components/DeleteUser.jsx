@@ -1,7 +1,7 @@
-import { useModal } from '../../../contexts/modalContext'
-import { useUsers } from '../../../hooks/users'
+import { useModal } from '../../../contexts/global/modalContext'
+import { useUsers } from '../../../hooks/other'
 
-import { DeleteData } from '../../../components/shared'
+import { DeleteData } from '../../../modules/shared'
 import { Button, Modal } from 'react-bootstrap'
 import { IoClose } from 'react-icons/io5'
 

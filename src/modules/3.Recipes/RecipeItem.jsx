@@ -1,10 +1,10 @@
 import { useEffect, useContext } from 'react'
-import { useRecipes } from '../../hooks/recipes'
-import { RecipesContext } from '../../contexts/recipesContext'
-import { useAuth } from '../../contexts/authContext'
-import { useModal } from '../../contexts/modalContext'
-import { FavoritesContext } from '../../contexts/favoritesContext'
-import { useFavorites } from '../../hooks/favorites'
+import { useRecipes } from '../../hooks/other'
+import { RecipesContext } from '../../contexts/modules/recipesContext'
+import { AuthContext } from '../../contexts/global/authContext'
+import { useModal } from '../../contexts/global/modalContext'
+import { FavoritesContext } from '../../contexts/modules/favoritesContext'
+import { useFavorites } from '../../hooks/other'
 import { staticURL } from '../../utils/api'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ import { FaEdit, FaTrashAlt, FaRegHeart, FaHeart } from 'react-icons/fa'
 import nodataImg from '../../assets/images/no-data.png'
 
 const RecipeItem = () => {
-  const { userType } = useAuth()
+  const { userType } = useContext(AuthContext)
   const navigate = useNavigate()
   // getting the id from the url
   const { id } = useParams()

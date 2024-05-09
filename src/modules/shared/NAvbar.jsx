@@ -1,10 +1,11 @@
-import { useAuth } from '../../contexts/authContext'
+import { AuthContext } from '../../contexts/global/authContext'
 import { FaBell, FaSearch, FaChevronDown } from 'react-icons/fa'
 import Avatar from '../../assets/avatar.png'
+import { useContext } from 'react'
 
 const Navbar = () => {
   // context
-  const { user } = useAuth()
+  const { user } = useContext(AuthContext)
   return (
     <div>
       <nav className='navbar navbar-expand-lg navbar-light bg-light rounded rounded-3 px-3'>

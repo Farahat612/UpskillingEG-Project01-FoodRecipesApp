@@ -1,16 +1,18 @@
 import { useEffect, useContext } from 'react'
-import { FavoritesContext } from '../../contexts/favoritesContext'
-import { useFavorites } from '../../hooks/favorites'
+import { useNavigate } from 'react-router-dom'
+import { FavoritesContext } from '../../contexts/modules/favoritesContext'
+import { useFavorites } from '../../hooks/other'
 import { staticURL } from '../../utils/api'
 
 import { MasterLayout } from '../../layouts'
-import { Header, NoData, LoadingScreen } from '../../components/shared'
+import { Header, NoData, LoadingScreen } from '../shared'
 import { Card } from 'react-bootstrap'
 import { FaHeart } from 'react-icons/fa'
 
 import Svg from '../../assets/header/others.svg'
 
 const UserFavourites = () => {
+  const navigate = useNavigate()
   const { state } = useContext(FavoritesContext)
   const { getFavorites, removeFromFavorites } = useFavorites()
 
@@ -58,6 +60,9 @@ const UserFavourites = () => {
                         className='fav-img'
                         variant='top'
                         src={`${staticURL}/${item.recipe.imagePath}`}
+                        onClick={() =>
+                          navigate(`/recipeItem/${item.recipe.id}`)
+                        }
                       />
                       <Card.Body>
                         <Card.Title className='mb-1'>

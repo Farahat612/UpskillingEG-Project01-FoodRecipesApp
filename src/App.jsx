@@ -1,14 +1,14 @@
 // react hooks
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 // react-router-dom
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 // contexts
-import { useAuth } from './contexts/authContext'
+import { AuthContext } from './contexts/global/authContext'
 // react-toastify
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // components
-import { NotFound, RouteGuard } from './components/shared'
+import { NotFound, RouteGuard, LoadingScreen } from './modules/shared'
 // Auth
 import {
   ForgotPass,
@@ -33,12 +33,22 @@ import { UserFavourites } from './modules/6.UserPortal'
 import './App.css'
 
 function App() {
-  const { saveUser } = useAuth()
+  const { saveUser, isLoading } = useContext(AuthContext)
 
   useEffect(() => {
     saveUser()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  if (isLoading) {
+    return (
+      <>
+        <div className='vw-100 vh-100 d-flex justify-content-center align-items-center gap-4 flex-column'>
+          <LoadingScreen />
+        </div>
+      </>
+    )
+  }
   return (
     <>
       <ToastContainer />

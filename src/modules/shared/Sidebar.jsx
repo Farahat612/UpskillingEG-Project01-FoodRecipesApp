@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 // react
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 // react-router-dom
 import { NavLink } from 'react-router-dom'
 // contexts
-import { useAuth } from '../../contexts/authContext'
-import { useModal } from '../../contexts/modalContext'
+import { AuthContext } from '../../contexts/global/authContext'
+import { useModal } from '../../contexts/global/modalContext'
+import { SidebarContext } from '../../contexts/global/sidebarContext'
 // toast
 import { toast } from 'react-toastify'
 // react-pro-sidebar
@@ -21,21 +22,21 @@ import {
 } from 'react-icons/fa'
 import { HiTemplate } from 'react-icons/hi'
 // components
-import { GlobalModal } from './'
-import { ChangePass } from '../../modules/1.Authentication'
+import { GlobalModal } from '.'
+import { ChangePass } from '../1.Authentication'
 
 // assets
 import Togller from '../../assets/toggler.png'
 
 const SideBar = () => {
   // Sidebar collapse state
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const { isCollapsed, setIsCollapsed } = useContext(SidebarContext)
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed)
   }
 
-  // logout functionality
-  const { logout, userType } = useAuth()
+  // auth context
+  const { logout, userType } = useContext(AuthContext)
   const handleLogoutClick = () => {
     logout()
     toast.warn('Logged out successfully', { autoClose: 1500 })

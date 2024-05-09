@@ -1,7 +1,7 @@
 import { useChange } from '../../hooks/Auth'
 
 import AuthForm from './components/AuthForm'
-import { LoadingSpinner } from '../../components/shared'
+import { LoadingSpinner } from '../shared'
 import { Form, InputGroup } from 'react-bootstrap'
 import { FaEye, FaEyeSlash, FaLock } from 'react-icons/fa'
 

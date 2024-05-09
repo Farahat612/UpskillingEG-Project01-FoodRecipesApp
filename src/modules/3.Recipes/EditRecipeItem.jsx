@@ -1,12 +1,12 @@
 import { useEffect, useContext } from 'react'
-import { useRecipes } from '../../hooks/recipes'
-import { RecipesContext } from '../../contexts/recipesContext'
+import { useRecipes } from '../../hooks/other'
+import { RecipesContext } from '../../contexts/modules/recipesContext'
 import { useParams } from 'react-router-dom'
 
 import RecipesForm from './components/RecipesForm'
 import { MasterLayout } from '../../layouts'
-import { Banner } from '../../components/shared'
-import {  Spinner,   } from 'react-bootstrap'
+import { Banner } from '../../modules/shared'
+import { Spinner } from 'react-bootstrap'
 
 const EditRecipeItem = () => {
   // getting the id from the url

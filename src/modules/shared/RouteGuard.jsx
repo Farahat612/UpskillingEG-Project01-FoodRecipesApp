@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuth } from '../../contexts/authContext'
+import { AuthContext } from '../../contexts/global/authContext'
 import PropTypes from 'prop-types'
 
-import { LoadingScreen } from './'
+import { LoadingScreen } from '.'
+import { useContext } from 'react'
 
 const RouteGuard = ({ mode }) => {
-  const { isLoading } = useAuth()
+  const { isLoading } = useContext(AuthContext)
   const token = localStorage.getItem('token')
 
   if (isLoading)
