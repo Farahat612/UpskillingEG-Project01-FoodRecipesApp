@@ -1,15 +1,15 @@
 import { useContext, useEffect } from 'react'
-import { UsersContext } from '../../contexts/modules/usersContext'
 import { useModal } from '../../contexts/global/modalContext'
+import { UsersContext } from '../../contexts/modules/usersContext'
 import { useUsers } from '../../hooks/other'
 import { staticURL } from '../../utils/api'
 
-import { Pagination, Table } from 'react-bootstrap'
+import { Pagination } from 'react-bootstrap'
 import { FaTrashAlt } from 'react-icons/fa'
 import Svg from '../../assets/header/others.svg'
 import nodataImg from '../../assets/images/no-data.png'
-import { Banner, Header, LoadingScreen, NoData } from '../../modules/shared'
 import { MasterLayout } from '../../layouts'
+import { Banner, DataTable, Header, NoData } from '../../modules/shared'
 import DeleteUser from './components/DeleteUser'
 
 const UsersList = () => {
@@ -57,6 +57,15 @@ const UsersList = () => {
 
   // delete user modal
   const { openDeleteUserModal, setActionUser } = useModal()
+
+  const tableColumns = [
+    'Username',
+    'Image',
+    'Email',
+    'Phone Number',
+    'Country',
+    'Group',
+  ]
 
   return (
     <MasterLayout>
@@ -114,81 +123,61 @@ const UsersList = () => {
 
       {/* Users Table */}
       <div className='users-table'>
-        {state.loading ? (
-          <div className='w-100 h-100 my-5 py-5 d-flex flex-column justify-content-center align-items-center gap-3'>
-            <LoadingScreen />
-          </div>
-        ) : (
-          <Table striped hover borderless responsive>
-            <thead className='rounded rounded-5'>
-              <tr className='table-secondary h-md rounded rounded-5'>
-                <th className='align-middle'>#</th>
-                <th className='align-middle'>Username</th>
-                <th className='align-middle'>Image</th>
-                <th className='align-middle'>Email</th>
-                <th className='align-middle'>Phone Number</th>
-                <th className='align-middle'>Country</th>
-                <th className='align-middle'>Group</th>
-                <th className='w-10 text-center align-middle'>Actions</th>
+        <DataTable tableColumns={tableColumns}>
+          {state.users &&
+          Array.isArray(state.users) &&
+          state.users.length > 0 ? (
+            state.users.map((user, index) => (
+              <tr key={user.id}>
+                <th scope='row'>{index + 1}</th>
+                <td>{user.userName}</td>
+                <td>
+                  <img
+                    src={
+                      user.imagePath
+                        ? `${staticURL}/${user.imagePath}`
+                        : nodataImg
+                    }
+                    alt={user.imagePath ? user.userName : 'No Image'}
+                    className='img-fluid '
+                    style={{
+                      width: '70px',
+                      height: '40px',
+                      objectFit: 'contain',
+                    }}
+                  />
+                </td>
+                <td className='text-truncate' style={{ maxWidth: '150px' }}>
+                  {user.email}
+                </td>
+                <td>{user.phoneNumber}</td>
+                <td>{user.country}</td>
+                <td>{user && user.group ? user.group.name : ''}</td>
+                <td>
+                  <p
+                    className='dropdown-item cursor-pointer text-danger d-flex gap-3 align-items-center m-0'
+                    id='delete-user'
+                    onClick={() => {
+                      setActionUser(user)
+                      openDeleteUserModal()
+                    }}
+                  >
+                    <FaTrashAlt className='pe-none' />
+                    <span className='text-dark pe-none'>Delete</span>
+                  </p>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {state.users &&
-              Array.isArray(state.users) &&
-              state.users.length > 0 ? (
-                state.users.map((user, index) => (
-                  <tr key={user.id}>
-                    <th scope='row'>{index + 1}</th>
-                    <td>{user.userName}</td>
-                    <td>
-                      <img
-                        src={
-                          user.imagePath
-                            ? `${staticURL}/${user.imagePath}`
-                            : nodataImg
-                        }
-                        alt={user.imagePath ? user.userName : 'No Image'}
-                        className='img-fluid '
-                        style={{
-                          width: '70px',
-                          height: '40px',
-                          objectFit: 'contain',
-                        }}
-                      />
-                    </td>
-                    <td className='text-truncate' style={{ maxWidth: '150px' }}>
-                      {user.email}
-                    </td>
-                    <td>{user.phoneNumber}</td>
-                    <td>{user.country}</td>
-                    <td>{user && user.group ? user.group.name : ''}</td>
-                    <td>
-                      <p
-                        className='dropdown-item cursor-pointer text-danger d-flex gap-3 align-items-center m-0'
-                        id='delete-user'
-                        onClick={() => {
-                          setActionUser(user)
-                          openDeleteUserModal()
-                        }}
-                      >
-                        <FaTrashAlt className='pe-none' />
-                        <span className='text-dark pe-none'>Delete</span>
-                      </p>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <>
-                  <tr>
-                    <td colSpan='8'>
-                      <NoData />
-                    </td>
-                  </tr>
-                </>
-              )}
-            </tbody>
-          </Table>
-        )}
+            ))
+          ) : (
+            <>
+              <tr>
+                <td colSpan='8'>
+                  <NoData />
+                </td>
+              </tr>
+            </>
+          )}
+        </DataTable>
       </div>
 
       {/* Pagination */}
