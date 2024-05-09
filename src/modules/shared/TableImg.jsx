@@ -21,7 +21,7 @@ const TableImg = ({ path, altTxt, fit }) => {
 export default TableImg
 
 TableImg.propTypes = {
-  path: PropTypes.string.isRequired,
+  path: PropTypes.string,
   altTxt: PropTypes.string.isRequired,
   fit: PropTypes.string,
 }
