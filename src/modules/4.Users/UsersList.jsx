@@ -3,12 +3,12 @@ import { useModal } from '../../contexts/global/modalContext'
 import { UsersContext } from '../../contexts/modules/usersContext'
 import { useUsers } from '../../hooks/other'
 
-import { Pagination } from 'react-bootstrap'
 import { FaTrashAlt } from 'react-icons/fa'
 import Svg from '../../assets/header/others.svg'
 import { MasterLayout } from '../../layouts'
 import {
   Banner,
+  CustomPagination,
   DataTable,
   Header,
   NoData,
@@ -47,17 +47,6 @@ const UsersList = () => {
     state.country,
     state.groups,
   ])
-
-  // pagination
-  // pagination
-  const handleNextPage = () => {
-    setPagination(state.pageNumber + 1, state.pageSize)
-  }
-  const handlePreviousPage = () => {
-    setPagination(state.pageNumber - 1, state.pageSize)
-  }
-  let totalPages = Math.ceil(state.totalNumberOfRecords / state.pageSize)
-  let currentPage = state.pageNumber
 
   // delete user modal
   const { openDeleteUserModal, setActionUser } = useModal()
@@ -177,34 +166,12 @@ const UsersList = () => {
 
       {/* Pagination */}
       {!state.loading && state.totalNumberOfRecords >= 10 && (
-        <Pagination className='d-flex justify-content-start '>
-          <Pagination.First
-            onClick={() => setPagination(1, state.pageSize)}
-            disabled={currentPage === 1}
-          />
-          <Pagination.Prev
-            onClick={handlePreviousPage}
-            disabled={currentPage === 1}
-          />
-          {totalPages > 0 &&
-            Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <Pagination.Item
-                key={page}
-                active={page === currentPage}
-                onClick={() => setPagination(page, state.pageSize)}
-              >
-                {page}
-              </Pagination.Item>
-            ))}
-          <Pagination.Next
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          />
-          <Pagination.Last
-            onClick={() => setPagination(totalPages, state.pageSize)}
-            disabled={currentPage === totalPages}
-          />
-        </Pagination>
+        <CustomPagination
+          pageNumber={state.pageNumber}
+          pageSize={state.pageSize}
+          setPagination={setPagination}
+          totalNumberOfRecords={state.totalNumberOfRecords}
+        />
       )}
 
       {/* Delete User Modal */}

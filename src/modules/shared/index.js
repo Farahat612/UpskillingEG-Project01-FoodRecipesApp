@@ -11,6 +11,7 @@ import NoData from './NoData'
 import DeleteData from './DeleteData'
 import DataTable from './DataTable'
 import TableImg from './TableImg'
+import CustomPagination from './CustomPagination'
 
 export {
   RouteGuard,
@@ -26,4 +27,5 @@ export {
   DeleteData,
   DataTable,
   TableImg,
+  CustomPagination,
 }
