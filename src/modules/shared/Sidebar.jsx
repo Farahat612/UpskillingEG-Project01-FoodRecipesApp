@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom'
 // contexts
 import { AuthContext } from '../../contexts/global/authContext'
 import { useModal } from '../../contexts/global/modalContext'
+import { SidebarContext } from '../../contexts/global/sidebarContext'
 // toast
 import { toast } from 'react-toastify'
 // react-pro-sidebar
@@ -29,12 +30,12 @@ import Togller from '../../assets/toggler.png'
 
 const SideBar = () => {
   // Sidebar collapse state
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const { isCollapsed, setIsCollapsed } = useContext(SidebarContext)
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed)
   }
 
-  // logout functionality
+  // auth context
   const { logout, userType } = useContext(AuthContext)
   const handleLogoutClick = () => {
     logout()

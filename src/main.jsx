@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import AuthProvider from './contexts/global/authContext.jsx'
 import ModalProvider from './contexts/global/modalContext.jsx'
+import SidebarProvider from './contexts/global/sidebarContext.jsx'
 import { CategoriesProvider } from './contexts/modules/categoriesContext.jsx'
 import { RecipesProvider } from './contexts/modules/recipesContext.jsx'
 import { TagsProvider } from './contexts/global/tagsContext.jsx'
@@ -23,7 +24,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <TagsProvider>
               <UsersProvider>
                 <FavoritesProvider>
-                  <App />
+                  <SidebarProvider>
+                    <App />
+                  </SidebarProvider>
                 </FavoritesProvider>
               </UsersProvider>
             </TagsProvider>
