@@ -17,7 +17,7 @@ const useUsers = () => {
     groupsFilter
   ) => {
     try {
-      dispatch({ type: 'GET_USERS' })
+      dispatch({ type: 'SET_LOADING', payload: true })
       const response = await apiProtected.get('/Users', {
         params: {
           pageNumber,
@@ -30,11 +30,24 @@ const useUsers = () => {
       })
       dispatch({ type: 'GET_USERS_SUCCESS', payload: response.data })
     } catch (error) {
-      dispatch({ type: 'GET_USERS_FAILURE' })
+      dispatch({ type: 'SET_LOADING', payload: false })
       notify('error', `Error fetching users - ${error.response.data.message}`)
     }
   }
 
+  const deleteUser = async (id) => {
+    try {
+      dispatch({ type: 'SET_LOADING', payload: true })
+      await apiProtected.delete(`/Users/${id}`)
+      notify('success', 'User deleted successfully')
+      dispatch({ type: 'DELETE_USER_SUCCESS', payload: id })
+    } catch (error) {
+      dispatch({ type: 'SET_LOADING', payload: false })
+      notify('error', `Error deleting user - ${error.response.data.message}`)
+    }
+  }
+
+  // Setting the filter and pagination
   const setUserNameFilter = (userNameFilter) => {
     dispatch({ type: 'SET_USERNAME_FILTER', payload: userNameFilter })
   }
@@ -53,18 +66,6 @@ const useUsers = () => {
 
   const setPagination = (pageNumber, pageSize) => {
     dispatch({ type: 'SET_PAGINATION', payload: { pageNumber, pageSize } })
-  }
-
-  const deleteUser = async (id) => {
-    try {
-      dispatch({ type: 'DELETE_USER' })
-      await apiProtected.delete(`/Users/${id}`)
-      notify('success', 'User deleted successfully')
-      dispatch({ type: 'DELETE_USER_SUCCESS', payload: id })
-    } catch (error) {
-      dispatch({ type: 'DELETE_USER_FAILURE' })
-      notify('error', `Error deleting user - ${error.response.data.message}`)
-    }
   }
 
   return {
