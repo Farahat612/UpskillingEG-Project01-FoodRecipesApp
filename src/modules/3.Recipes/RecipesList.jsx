@@ -283,7 +283,7 @@ const RecipesList = () => {
         </DataTable>
       </div>
       {/* Pagination */}
-      {!state.loading && state.totalNumberOfRecords > 10 && (
+      {!state.loading && !favoritesState.loading && state.totalNumberOfRecords > 10 && (
         <CustomPagination
           pageNumber={state.pageNumber}
           pageSize={state.pageSize}
