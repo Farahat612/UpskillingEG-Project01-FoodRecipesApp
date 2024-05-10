@@ -54,7 +54,7 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-          {/* <Route path='/' element={<RouteGuard mode='private' />}> */}
+          <Route path='/' element={<RouteGuard mode='private' />}>
             <Route index element={<Dashboard />} />
             <Route index path='dashboard' element={<Dashboard />} />
             <Route path='categories' element={<CategoriesList />} />
@@ -64,15 +64,15 @@ function App() {
             <Route path='recipeItem/:id' element={<RecipeItem />} />
             <Route path='users' element={<UsersList />} />
             <Route path='userFavourites' element={<UserFavourites />} />
-          {/* </Route> */}
+          </Route>
 
-          {/* <Route path='/' element={<RouteGuard mode='public' />}> */}
+          <Route path='/' element={<RouteGuard mode='public' />}>
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
             <Route path='verifyPass' element={<VerifyPass />} />
             <Route path='forgotPass' element={<ForgotPass />} />
             <Route path='resetPass' element={<ResetPass />} />
-          {/* </Route> */}
+          </Route>
 
           <Route path='*' element={<NotFound />} />
         </Routes>
