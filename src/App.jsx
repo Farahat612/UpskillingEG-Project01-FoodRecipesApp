@@ -74,7 +74,7 @@ function App() {
             <Route path='resetPass' element={<ResetPass />} />
           </Route>
 
-          {/* <Route path='*' element={<NotFound />} /> */}
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>
     </>
