@@ -66,7 +66,7 @@ function App() {
             <Route path='userFavourites' element={<UserFavourites />} />
           </Route>
 
-          <Route element={<RouteGuard mode='public' />}>
+          <Route path='/' element={<RouteGuard mode='public' />}>
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
             <Route path='verifyPass' element={<VerifyPass />} />
