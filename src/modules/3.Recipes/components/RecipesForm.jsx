@@ -60,9 +60,11 @@ const RecipesForm = ({ recipe }) => {
   const appendFormData = (data) => {
     const formData = new FormData()
     for (let key in data) {
-      key === 'recipeImage'
-        ? formData.append(key, data[key][0])
-        : formData.append(key, data[key])
+      if (data[key]) {
+        key === 'recipeImage'
+          ? formData.append(key, data[key][0])
+          : formData.append(key, data[key])
+      }
     }
     return formData
   }
