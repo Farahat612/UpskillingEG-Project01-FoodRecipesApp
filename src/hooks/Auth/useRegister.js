@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 // react-hook-form
 import { useForm } from 'react-hook-form'
-// axios
+// utils
 import { apiPublic } from '../../utils/api.js'
-// toast
 import { notify } from '../../utils/notify'
+import { appendFormData } from '../../utils/formData'
 
 const useRegister = () => {
   // LoadingState
@@ -26,17 +26,6 @@ const useRegister = () => {
     formState: { errors },
     watch,
   } = useForm()
-
-  // creating formData
-  const appendFormData = (data) => {
-    const formData = new FormData()
-    for (let key in data) {
-      key === 'profileImage'
-        ? formData.append(key, data[key][0])
-        : formData.append(key, data[key])
-    }
-    return formData
-  }
 
   // onSubmit function
   const onSubmit = async (data) => {

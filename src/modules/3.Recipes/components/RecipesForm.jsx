@@ -9,6 +9,7 @@ import { useCategories } from '../../../hooks/other'
 import { useRecipes } from '../../../hooks/other'
 import { useNavigate } from 'react-router-dom'
 import { staticURL } from '../../../utils/api'
+import { appendFormData } from '../../../utils/formData'
 
 import { LoadingScreen } from '../../../modules/shared'
 import { Form, InputGroup } from 'react-bootstrap'
@@ -56,18 +57,7 @@ const RecipesForm = ({ recipe }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipe])
 
-  // creating formData
-  const appendFormData = (data) => {
-    const formData = new FormData()
-    for (let key in data) {
-      if (data[key]) {
-        key === 'recipeImage'
-          ? formData.append(key, data[key][0])
-          : formData.append(key, data[key])
-      }
-    }
-    return formData
-  }
+  
   // loading state from recipes context
   const { state } = useContext(RecipesContext)
 
