@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from 'react'
 import { useModal } from '../../contexts/global/modalContext'
 import { CategoriesContext } from '../../contexts/modules/categoriesContext'
@@ -18,19 +17,20 @@ import {
 import { CategoryFormModal } from './'
 
 const CategoriesList = () => {
+  // context
   const { state } = useContext(CategoriesContext)
   const { getCategories, setFilter, setPagination } = useCategories()
-
+  // Fetch Categories
   useEffect(() => {
     getCategories(state.pageNumber, state.pageSize, state.filter)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.pageNumber, state.pageSize, state.filter])
 
   // Actions Modal
   const { openCategoryModal, setType, setActionCategory } = useModal()
-
   const actionTriggersClick = (e, category) => {
     const action = e.target.id
-    console.log(action, category?.name)
+    // console.log(action, category?.name)
     setActionCategory(category)
     switch (action) {
       case 'edit-category':
@@ -45,6 +45,7 @@ const CategoriesList = () => {
     openCategoryModal()
   }
 
+  // Table Columns
   const tableColumns = ['Name', 'Date']
 
   return (
