@@ -18,7 +18,7 @@ const NotFound = () => {
         </p>
 
         <Link
-          to='/dashboard'
+          to='/'
           className='btn btn-success px-5 d-flex align-items-center gap-3'
         >
           <i className='fas fa-arrow-left d-inline-block'></i>
