@@ -21,8 +21,6 @@
   ## more info on configuring this file: https://ntl.fyi/file-based-build-config
 
 
-// netlify.toml
-
 [[redirects]]
 from = "/*"
 to = "/index.html"
