@@ -1,12 +1,7 @@
 // react hooks
 import { useContext } from 'react'
 // react-router-dom
-import {
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 // contexts
 import { AuthContext } from './contexts/global/authContext'
 // react-toastify
@@ -49,37 +44,32 @@ function App() {
       </>
     )
   }
-
-  const router = createBrowserRouter(
-    createRoutesFromElements([
-      // eslint-disable-next-line react/jsx-key
-      <Route>
-        <Route path='/' element={<RouteGuard />}>
-          <Route index element={<Dashboard />} />
-          <Route path='dashboard' element={<Dashboard />} />
-          <Route path='categories' element={<CategoriesList />} />
-          <Route path='recipes' element={<RecipesList />} />
-          <Route path='addRecipe' element={<AddRecipeItem />} />
-          <Route path='editRecipe/:id' element={<EditRecipeItem />} />
-          <Route path='recipeItem/:id' element={<RecipeItem />} />
-          <Route path='users' element={<UsersList />} />
-          <Route path='userFavourites' element={<UserFavourites />} />
-        </Route>
-
-        <Route path='login' element={<Login />} />
-        <Route path='register' element={<Register />} />
-        <Route path='verifyPass' element={<VerifyPass />} />
-        <Route path='forgotPass' element={<ForgotPass />} />
-        <Route path='resetPass' element={<ResetPass />} />
-
-        <Route path='*' element={<NotFound />} />
-      </Route>,
-    ])
-  )
   return (
     <>
       <ToastContainer />
-      <RouterProvider router={router} />
+      <Router>
+        <Routes>
+          <Route  element={<RouteGuard />}>
+            <Route index element={<Dashboard />} />
+            <Route path='dashboard' element={<Dashboard />} />
+            <Route path='categories' element={<CategoriesList />} />
+            <Route path='recipes' element={<RecipesList />} />
+            <Route path='addRecipe' element={<AddRecipeItem />} />
+            <Route path='editRecipe/:id' element={<EditRecipeItem />} />
+            <Route path='recipeItem/:id' element={<RecipeItem />} />
+            <Route path='users' element={<UsersList />} />
+            <Route path='userFavourites' element={<UserFavourites />} />
+          </Route>
+
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
+          <Route path='verifyPass' element={<VerifyPass />} />
+          <Route path='forgotPass' element={<ForgotPass />} />
+          <Route path='resetPass' element={<ResetPass />} />
+
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </Router>
     </>
   )
 }
