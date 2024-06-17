@@ -51,7 +51,7 @@ function App() {
         <Routes>
           <Route path='/' element={<RouteGuard />}>
             <Route index element={<Dashboard />} />
-            <Route index path='dashboard' element={<Dashboard />} />
+            <Route path='dashboard' element={<Dashboard />} />
             <Route path='categories' element={<CategoriesList />} />
             <Route path='recipes' element={<RecipesList />} />
             <Route path='addRecipe' element={<AddRecipeItem />} />
