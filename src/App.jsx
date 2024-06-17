@@ -1,13 +1,7 @@
 // react hooks
 import { useContext } from 'react'
 // react-router-dom
-import {
-  Route,
-  BrowserRouter as Router,
-  RouterProvider,
-  Routes,
-  createHashRouter,
-} from 'react-router-dom'
+import { RouterProvider, createHashRouter } from 'react-router-dom'
 // contexts
 import { AuthContext } from './contexts/global/authContext'
 // react-toastify
@@ -67,11 +61,18 @@ function App() {
         { path: 'userFavourites', element: <UserFavourites /> },
       ],
     },
-    { path: 'login', element: <Login />, errorElement: <NotFound /> },
-    { path: 'register', element: <Register />, errorElement: <NotFound /> },
-    { path: 'verifyPass', element: <VerifyPass />, errorElement: <NotFound /> },
-    { path: 'forgotPass', element: <ForgotPass />, errorElement: <NotFound /> },
-    { path: 'resetPass', element: <ResetPass />, errorElement: <NotFound /> },
+    {
+      path: 'auth',
+      errorElement: <NotFound />,
+      children: [
+        { index: true, element: <Login /> },
+        { path: 'login', element: <Login /> },
+        { path: 'register', element: <Register /> },
+        { path: 'verifyPass', element: <VerifyPass /> },
+        { path: 'forgotPass', element: <ForgotPass /> },
+        { path: 'resetPass', element: <ResetPass /> },
+      ],
+    },
   ])
 
   return (

@@ -39,7 +39,7 @@ const useReset = () => {
       // Show success message
       notify('success', 'Password has been updated successfully, please login.')
       //Redirect to login page
-      navigate('/login')
+      navigate('/auth/login')
     } catch (error) {
       // console.log(error.message)
       // Show error message

@@ -50,7 +50,7 @@ const useChange = () => {
       closeModal()
       logout()
       // navigate to login
-      navigate('/login')
+      navigate('/auth/login')
     } catch (error) {
       console.log(error.response)
       // Show error message

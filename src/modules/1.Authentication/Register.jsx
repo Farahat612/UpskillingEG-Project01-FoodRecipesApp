@@ -253,7 +253,7 @@ const Register = () => {
             <div className='d-flex justify-content-center mt-5'>
               <span
                 className='text-success cursor-pointer '
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/auth/login')}
               >
                 Already have an account? Login
               </span>

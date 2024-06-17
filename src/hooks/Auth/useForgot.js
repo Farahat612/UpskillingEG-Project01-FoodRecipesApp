@@ -40,7 +40,7 @@ const useForgot = () => {
        'Your request is being processed, please check your email.'
      )
       // Redirect to reset password page
-      navigate('/resetpass')
+      navigate('/auth/resetpass')
     } catch (error) {
       // console.log(error.message)
       // Show error message
