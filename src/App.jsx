@@ -1,5 +1,5 @@
 // react hooks
-import { useEffect, useContext } from 'react'
+import { useContext } from 'react'
 // react-router-dom
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 // contexts
@@ -8,7 +8,7 @@ import { AuthContext } from './contexts/global/authContext'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // components
-import { NotFound, RouteGuard, LoadingScreen } from './modules/shared'
+import { LoadingScreen, NotFound, RouteGuard } from './modules/shared'
 // Auth
 import {
   ForgotPass,
@@ -33,12 +33,7 @@ import { UserFavourites } from './modules/6.UserPortal'
 import './App.css'
 
 function App() {
-  const { saveUser, isLoading } = useContext(AuthContext)
-
-  useEffect(() => {
-    saveUser()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const { isLoading } = useContext(AuthContext)
 
   if (isLoading) {
     return (
@@ -54,7 +49,7 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path='/' element={<RouteGuard mode='private' />}>
+          <Route path='/' element={<RouteGuard />}>
             <Route index element={<Dashboard />} />
             <Route index path='dashboard' element={<Dashboard />} />
             <Route path='categories' element={<CategoriesList />} />
@@ -66,13 +61,11 @@ function App() {
             <Route path='userFavourites' element={<UserFavourites />} />
           </Route>
 
-          <Route element={<RouteGuard mode='public' />}>
-            <Route path='login' element={<Login />} />
-            <Route path='register' element={<Register />} />
-            <Route path='verifyPass' element={<VerifyPass />} />
-            <Route path='forgotPass' element={<ForgotPass />} />
-            <Route path='resetPass' element={<ResetPass />} />
-          </Route>
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
+          <Route path='verifyPass' element={<VerifyPass />} />
+          <Route path='forgotPass' element={<ForgotPass />} />
+          <Route path='resetPass' element={<ResetPass />} />
 
           <Route path='*' element={<NotFound />} />
         </Routes>

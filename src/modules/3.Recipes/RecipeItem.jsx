@@ -15,7 +15,8 @@ import { FaEdit, FaTrashAlt, FaRegHeart, FaHeart } from 'react-icons/fa'
 import nodataImg from '../../assets/images/no-data.png'
 
 const RecipeItem = () => {
-  const { userType } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
+  const userType = user.userType
   const navigate = useNavigate()
   // getting the id from the url
   const { id } = useParams()
