@@ -1,7 +1,13 @@
 // react hooks
 import { useContext } from 'react'
 // react-router-dom
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import {
+  Route,
+  BrowserRouter as Router,
+  RouterProvider,
+  Routes,
+  createHashRouter,
+} from 'react-router-dom'
 // contexts
 import { AuthContext } from './contexts/global/authContext'
 // react-toastify
@@ -44,32 +50,34 @@ function App() {
       </>
     )
   }
+  const router = createHashRouter([
+    {
+      path: '/',
+      element: <RouteGuard />,
+      errorElement: <NotFound />,
+      children: [
+        { index: true, element: <Dashboard /> },
+        { path: 'dashboard', element: <Dashboard /> },
+        { path: 'categories', element: <CategoriesList /> },
+        { path: 'recipes', element: <RecipesList /> },
+        { path: 'addRecipe', element: <AddRecipeItem /> },
+        { path: 'editRecipe/:id', element: <EditRecipeItem /> },
+        { path: 'recipeItem/:id', element: <RecipeItem /> },
+        { path: 'users', element: <UsersList /> },
+        { path: 'userFavourites', element: <UserFavourites /> },
+      ],
+    },
+    { path: 'login', element: <Login />, errorElement: <NotFound /> },
+    { path: 'register', element: <Register />, errorElement: <NotFound /> },
+    { path: 'verifyPass', element: <VerifyPass />, errorElement: <NotFound /> },
+    { path: 'forgotPass', element: <ForgotPass />, errorElement: <NotFound /> },
+    { path: 'resetPass', element: <ResetPass />, errorElement: <NotFound /> },
+  ])
+
   return (
     <>
       <ToastContainer />
-      <Router>
-        <Routes>
-          <Route  element={<RouteGuard />}>
-            <Route index element={<Dashboard />} />
-            <Route path='dashboard' element={<Dashboard />} />
-            <Route path='categories' element={<CategoriesList />} />
-            <Route path='recipes' element={<RecipesList />} />
-            <Route path='addRecipe' element={<AddRecipeItem />} />
-            <Route path='editRecipe/:id' element={<EditRecipeItem />} />
-            <Route path='recipeItem/:id' element={<RecipeItem />} />
-            <Route path='users' element={<UsersList />} />
-            <Route path='userFavourites' element={<UserFavourites />} />
-          </Route>
-
-          <Route path='login' element={<Login />} />
-          <Route path='register' element={<Register />} />
-          <Route path='verifyPass' element={<VerifyPass />} />
-          <Route path='forgotPass' element={<ForgotPass />} />
-          <Route path='resetPass' element={<ResetPass />} />
-
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </Router>
+      <RouterProvider router={router} />
     </>
   )
 }
