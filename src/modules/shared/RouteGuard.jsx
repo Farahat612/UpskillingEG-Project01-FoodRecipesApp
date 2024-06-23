@@ -1,32 +1,18 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { Outlet, Navigate, useLocation } from 'react-router-dom'
 import { AuthContext } from '../../contexts/global/authContext'
-import PropTypes from 'prop-types'
 
-import { LoadingScreen } from '.'
 import { useContext } from 'react'
 
-const RouteGuard = ({ mode }) => {
-  const { isLoading } = useContext(AuthContext)
-  const token = localStorage.getItem('token')
+const RouteGuard = () => {
+  const { user } = useContext(AuthContext)
+  const isAuthenticated = user.isAuthenticated
+  const location = useLocation()
 
-  if (isLoading)
-    return (
-      <>
-        <div className='vw-100 vh-100 d-flex justify-content-center align-items-center gap-4 flex-column'>
-          <LoadingScreen />
-        </div>
-      </>
-    )
-
-  if (mode === 'public') {
-    return token ? <Navigate to='/' /> : <Outlet />
+  if (!isAuthenticated) {
+    return <Navigate to='/auth/login' state={{ from: location }} replace />
   } else {
-    return token ? <Outlet /> : <Navigate to='/login' />
+    return <Outlet />
   }
 }
 
 export default RouteGuard
-
-RouteGuard.propTypes = {
-  mode: PropTypes.string.isRequired,
-}

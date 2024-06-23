@@ -19,7 +19,7 @@ const useLogin = () => {
   // initialize navigate to redirect to another page
   const navigate = useNavigate()
   // Save user data to context
-  const { saveUser } = useContext(AuthContext)
+  const { login } = useContext(AuthContext)
 
   // Destructure register, handleSubmit, errors from useForm() hook
   const {
@@ -39,10 +39,8 @@ const useLogin = () => {
       const response = await apiPublic.post('/Users/Login', data)
       // console.log(response.data)
       // * Success:
-      // Save token in local storage
-      localStorage.setItem('token', response.data.token)
       // save login Data
-      saveUser()
+      login(response.data.token)
       // Show success message
       notify('success', 'Logged in successfully')
       //Redirect to dashboard

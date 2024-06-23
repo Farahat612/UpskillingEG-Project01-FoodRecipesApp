@@ -34,7 +34,7 @@ const useRegister = () => {
       setBtnLoading(true)
       const response = await apiPublic.post('/Users/Register', formData)
       notify('success', response.data.message)
-      navigate('/verifyPass')
+      navigate('/auth/verifyPass')
     } catch (error) {
       console.log(error)
       notify('error', error.response.data.message)

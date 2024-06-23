@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://upskilling-egypt.com:3006/api/v1'
-const staticURL = 'https://upskilling-egypt.com:3006'
-
+const baseURL = import.meta.env.VITE_API_URL
+const staticURL = import.meta.env.VITE_STATIC_URL
 
 // axios instance without token
 const apiPublic = axios.create({

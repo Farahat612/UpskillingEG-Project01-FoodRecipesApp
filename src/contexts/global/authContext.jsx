@@ -7,44 +7,42 @@ export const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [user, setUser] = useState(null)
-  const [userType, setUserType] = useState('SuperAdmin')
-
-  const saveUser = () => {
-    setIsLoading(true)
+  const [user, setUser] = useState(() => {
     const token = localStorage.getItem('token')
-    token && setUser(jwtDecode(token))
-    setIsLoading(false)
-  }
+    return {
+      isAuthenticated: token ? true : false,
+      userData: token ? jwtDecode(token) : null,
+      userType: token ? jwtDecode(token).userGroup : null,
+    }
+  })
 
-  const saveUserType = () => {
+  const login = (token) => {
     setIsLoading(true)
-    const token = localStorage.getItem('token')
-    let userData
-    token && (userData = jwtDecode(token))
-    userData.userGroup === 'SuperAdmin'
-      ? setUserType('SuperAdmin')
-      : setUserType('SystemUser')
+    localStorage.setItem('token', token)
+    setUser({
+      isAuthenticated: token ? true : false,
+      userData: token ? jwtDecode(token) : null,
+      userType: token ? jwtDecode(token).userGroup : null,
+    })
     setIsLoading(false)
   }
 
   const logout = () => {
-    setIsLoading(true)
     localStorage.removeItem('token')
-    setUser(null)
-    setIsLoading(false)
+    setUser({
+      isAuthenticated: false,
+      userData: null,
+      userType: null,
+    })
   }
 
   return (
     <AuthContext.Provider
       value={{
         isLoading,
-        setIsLoading,
         user,
         logout,
-        saveUser,
-        saveUserType,
-        userType,
+        login,
       }}
     >
       {children}

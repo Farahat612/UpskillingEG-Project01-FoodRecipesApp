@@ -6,12 +6,13 @@ import { Header, Banner } from '../../modules/shared'
 import HomeSvg from '../../assets/header/home.svg'
 
 const Dashboard = () => {
-  const { user, userType } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
+  const userType = user.userType
   return (
     <MasterLayout>
       <div className='d-flex flex-column gap-3'>
         <Header
-          title={`Welcome ${user?.userName}!`}
+          title={`Welcome ${user?.userData.userName}!`}
           description='
           This is a welcoming screen for the entry of the application , you can now see the options
         '

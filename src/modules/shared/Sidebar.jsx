@@ -36,7 +36,8 @@ const SideBar = () => {
   }
 
   // auth context
-  const { logout, userType } = useContext(AuthContext)
+  const { logout, user } = useContext(AuthContext)
+  const userType = user.userType
   const handleLogoutClick = () => {
     logout()
     toast.warn('Logged out successfully', { autoClose: 1500 })

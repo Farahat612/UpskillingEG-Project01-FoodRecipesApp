@@ -33,7 +33,7 @@ const useVerify = () => {
       // Show success message
       notify('success', response.data.message)
       // Redirect to reset password page
-      navigate('/login')
+      navigate('/auth/login')
     } catch (error) {
       // Show error message
       notify('error', error.response.data.message)

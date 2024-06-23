@@ -23,7 +23,8 @@ import {
 import { DeleteRecipeItem } from './'
 
 const RecipesList = () => {
-  const { userType } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
+  const userType = user.userType
   // navigate
   const navigate = useNavigate()
   // categories for filteration

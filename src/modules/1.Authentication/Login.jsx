@@ -87,7 +87,7 @@ const Login = () => {
               <div>
                 <span
                   className=' text-reset cursor-pointer '
-                  onClick={() => navigate('/register')}
+                  onClick={() => navigate('/auth/register')}
                 >
                   Register Now?
                 </span>
@@ -95,7 +95,7 @@ const Login = () => {
               <div>
                 <span
                   className='text-success cursor-pointer '
-                  onClick={() => navigate('/forgotpass')}
+                  onClick={() => navigate('/auth/forgotpass')}
                 >
                   Forgot Password?
                 </span>
