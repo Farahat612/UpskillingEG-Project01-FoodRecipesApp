@@ -6,6 +6,8 @@ The Food Recipes Management System is a comprehensive web application designed t
 
 You may watch the following video demo:
 
+[FoodrecipeappDemo.webm](https://github.com/Farahat612/UpskillingEG-Project01-FoodRecipesApp/assets/67427124/8ad8f1da-18ce-4a07-b752-2cef9539b351)
+
 > A live production demo will be available soon after resolving a deployment issue.
 
 ## Features
