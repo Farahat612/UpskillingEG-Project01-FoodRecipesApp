@@ -71,7 +71,7 @@ To get the application running locally on your machine, follow these steps:
 2. Change directory
 
    ```shell
-   cd WebTech-Corner
+   cd UpskillingEG-Project01-FoodRecipesApp
    ```
 
 3. Install dependencies
@@ -86,7 +86,7 @@ To get the application running locally on your machine, follow these steps:
    npm run dev
    ```
 
-5. Visit `http://127.0.0.1:3000/` in your browser.
+5. Visit `http://127.0.0.1:5173/` in your browser.
 
 ## Acknowledgment
 
